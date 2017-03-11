@@ -8,40 +8,20 @@
         <script type="text/javascript" src="../../javascript/scripts.min.js"></script>
         
         <script type="text/javascript">
-            document.addEventListener('DOMContentLoaded', function() {
-                location.queryString = {};
-                location.search.substr(1).split("&").forEach(function (pair) {
-                    if (pair === "") return;
-                    var parts = pair.split("=");
-                    location.queryString[parts[0]] = parts[1] &&
-                        decodeURIComponent(parts[1].replace(/\+/g, " "));
-                });
-
-                var xhr = Ajax.createXHR();
-                var token  = Login.getCookie('token');
-                var consulta = "";
-
-                if (token !== "") {
-                    consulta = "&tk="+token;
-                }
-
-                xhr.open("GET","http://localhost/sistemaRest/api/v1/controller/divisao.php?a=2&id="+location.queryString.codigo+consulta,true);
+                document.addEventListener('DOMContentLoaded', function() {
+                    Login.logado();
                     
-                xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-                xhr.onreadystatechange = function() {
-                    //Verificar pelo estado "4" de pronto.
-
-                    if (xhr.readyState == '4' && xhr.status == '200') {
-                        //Pegar dados da resposta json
-                        var data = JSON.parse(xhr.responseText);
-                        document.getElementById("codigo").value = data.codigo_divisao;
-                        document.getElementById("txtNome").value = data.nome;
-                    }
-                }
-
-                xhr.send();
-            });
-        </script>
+                    location.queryString = {};
+                    location.search.substr(1).split("&").forEach(function (pair) {
+                        if (pair === "") return;
+                        var parts = pair.split("=");
+                        location.queryString[parts[0]] = parts[1] &&
+                            decodeURIComponent(parts[1].replace(/\+/g, " "));
+                    });
+                    
+                    Divisao.detalhe(location.queryString.codigo);
+                });
+            </script>
 	</head>
 	
 	<body>

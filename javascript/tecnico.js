@@ -48,7 +48,7 @@ class Tecnico
     static detalhe(codigo)
     {
         var xhr = Ajax.createXHR();
-        xhr.open("GET","http://localhost/laravel-api/public/api/v1/tecnicos"+codigo,true);
+        xhr.open("GET","http://localhost/laravel-api/public/api/v1/tecnicos/"+codigo,true);
         xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
         xhr.onreadystatechange = function() {
             //Verificar pelo estado "4" de pronto.
@@ -58,7 +58,11 @@ class Tecnico
                 var data = JSON.parse(xhr.responseText);
                 document.getElementById("codigo").value = data.codigo_tecnico;
                 document.getElementById("txtNome").value = data.nome;
-                document.getElementById("txtDataNascimento").value = data.data_nascimento;
+
+                var data_nascimento = data.data_nascimento.split("-");
+                data_nascimento = data_nascimento[2]+"/"+data_nascimento[1]+"/"+data_nascimento[0]
+
+                document.getElementById("txtDataNascimento").value = data_nascimento;
             }
         }
 
@@ -234,24 +238,21 @@ class Tecnico
             msg = "Técnico cadastrado com sucesso.";
         } else if (op === 'alt') {
             msg = "Técnico alterado com sucesso.";
-        } else if (op === 'exc') {
-            msg = "Técnico excluido com sucesso.";
         }
 
         //Verificar pelo estado "4" de pronto.
         if (xhr.readyState == '4') {
             //Pegar dados da resposta json
-            
             var json = JSON.parse(xhr.responseText);
 
             if (xhr.status == '200' || xhr.status == '201') {
-                document.getElementById("txtNome").value = "";
+               
+                if (op == 'cad') {
+                    document.getElementById("txtNome").value = "";
+                }
 
                 if (op !== 'exc') {
                     document.getElementById("mensagem").innerHTML = msg;
-                } else {
-                    alert(msg);
-                    location.reload(); 
                 }
 
             } else if (xhr.status == '422') {
@@ -301,10 +302,11 @@ class Tecnico
             }
             
             if(mensagem == "") {
-                xhr.open("DELETE","http://localhost/laravel-api/public/api/v1/tecnicos"+codigo, true);
+                xhr.open("DELETE","http://localhost/laravel-api/public/api/v1/tecnicos/"+codigo, true);
                 xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
                 xhr.onreadystatechange = function() {
                     Tecnico.callbackCadAltDel(xhr, 'exc');
+                    location.reload();
                 }
 
                 var jwtoken = '';
@@ -338,6 +340,7 @@ class Tecnico
             xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
             xhr.onreadystatechange = function() {
                 Tecnico.callbackCadAltDel(xhr, 'cad');
+                location.reload();
             }
 
             var jwtoken = '';
@@ -368,7 +371,7 @@ class Tecnico
         var xhr = Ajax.createXHR();
         
         if(mensagem == "" && xhr != undefined) {
-            xhr.open("PUT","http://localhost/laravel-api/public/api/v1/tecnicos"+codigo,true);
+            xhr.open("PUT","http://localhost/laravel-api/public/api/v1/tecnicos/"+codigo,true);
             xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
             xhr.onreadystatechange = function() {
                 Tecnico.callbackCadAltDel(xhr, 'alt');

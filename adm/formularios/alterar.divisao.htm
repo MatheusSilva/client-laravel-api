@@ -9,6 +9,7 @@
 
         <script type="text/javascript">
             document.addEventListener('DOMContentLoaded', function() {
+                Login.logado();
                 location.queryString = {};
                 location.search.substr(1).split("&").forEach(function (pair) {
                     if (pair === "") return;

@@ -24,29 +24,26 @@
 			<div id="conteudo" class="form">
 				<h2 class="titulo">Login</h2>
 				
-				<form method="post" 
-				action="../adaptadores/adaptador.login.php"
-				name="frmLogin"
-				id="frmLogin" onsubmit="return Login.valida()">
+				<form name="frmLogin" id="frmLogin" >
 					<table>
 						<tr>
 							<td>Login:</td>
 							<td>
-								<input type="text" name="txtTorcedor" id="txtTorcedor" />
+								<input type="text" name="email" id="email" />
 							</td>
 						</tr>
 						
 						<tr>
 							<td>Senha:</td>
 							<td>
-								<input type="password" name="txtSenha" id="txtSenha" />
+								<input type="password" name="password" id="password" />
 							</td>
 						</tr>
 						
 						<tr>
 							<td colspan="2">
-								<input type="submit" name="btnAcessar" 
-									value="Acessar" id="btnAcessar" />
+								<input type="button" name="btnAcessar" 
+									value="Acessar" id="btnAcessar" onclick="Login.entrar(frmLogin)" />
 									
 								<input type="reset" name="btnLimpar"
 									value="Limpar" id="btnLimpar" />
@@ -55,11 +52,7 @@
 					</table>
 				</form>
 				
-				<?php
-                if (isset($_GET['msg'])) {
-                    echo urldecode($_GET['msg']);
-                }
-                ?>
+				<div id="mensagem"></div>
 				
 			</div>
 			

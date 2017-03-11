@@ -18,6 +18,7 @@
             });
             
             document.addEventListener('DOMContentLoaded', function() {
+                Login.logado();
                 var codigo = location.queryString.codigo;
                 Time.carregaDivisao(codigo);
                 Time.carregaCategoria(codigo);

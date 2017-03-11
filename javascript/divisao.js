@@ -169,23 +169,21 @@ class Divisao
             msg = "Divisão cadastrada com sucesso.";
         } else if (op === 'alt') {
             msg = "Divisão alterada com sucesso.";
-        } else if (op === 'exc') {
-            msg = "Técnico excluido com sucesso.";
         }
 
         //Verificar pelo estado "4" de pronto.
         if (xhr.readyState == '4') {
             //Pegar dados da resposta json
-            document.getElementById("txtNome").value = "";
             var json = JSON.parse(xhr.responseText);
 
             if (xhr.status == '200' || xhr.status == '201') {
 
+                if (op == 'cad') {
+                    document.getElementById("txtNome").value = "";
+                }
+
                 if (op !== 'exc') {
                     document.getElementById("mensagem").innerHTML = msg;
-                } else {
-                    alert(msg);
-                    location.reload(); 
                 }
                 
             } else if (xhr.status == '422') {
@@ -236,6 +234,7 @@ class Divisao
                 xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
                 xhr.onreadystatechange = function() {
                     Tecnico.callbackCadAltDel(xhr, 'exc');
+                    location.reload();
                 }
 
                 var jwtoken = '';

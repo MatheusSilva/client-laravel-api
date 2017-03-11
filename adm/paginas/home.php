@@ -1,17 +1,13 @@
-<?php
-	error_reporting(-1);
-    require_once "../../vendor/autoload.php";
-    use matheus\sistemaRest\api\v1\lib\Login;
-    
-    Login::verificar();
-?>
-
 <!DOCTYPE html> 
 <html lang="pt-br">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title>Cat&aacute;logo de Times</title>
 		<link rel="stylesheet" type="text/css" href="../../css/layoutadm.css" />
+		<script type="text/javascript" src="../../javascript/scripts.min.js"></script>
+		<script type="text/javascript">
+			Login.logado();
+		</script>
 	</head>
 	
 	<body>

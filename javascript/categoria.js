@@ -21,7 +21,7 @@ class Categoria
     static detalhe(codigo)
     {
         var xhr = Ajax.createXHR();
-        xhr.open("GET","http://localhost/laravel-api/public/api/v1/categorias"+codigo,true);
+        xhr.open("GET","http://localhost/laravel-api/public/api/v1/categorias/"+codigo,true);
         xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
         xhr.onreadystatechange = function() {
             //Verificar pelo estado "4" de pronto.
@@ -149,6 +149,12 @@ class Categoria
                         } else {
                             table.innerHTML = "<br /><b>Algum erro desconhecido ocorreu.</b>";
                         }
+                    } else if (xhr.status == '400') {
+                        if (json.error !== undefined && json.error === 'token_not_provided') {
+                            table.innerHTML = "<br /><b>Token expirado. Faça o login novamente.</b>";
+                        } else {
+                            table.innerHTML = "<br /><b>Algum erro desconhecido ocorreu.</b>";
+                        }
                     } else {
                         table.innerHTML = "<br /><b>Algum erro desconhecido ocorreu.</b>";
                     }
@@ -174,25 +180,23 @@ class Categoria
             msg = "Categoria cadastrada com sucesso.";
         } else if (op === 'alt') {
             msg = "Categoria alterada com sucesso.";
-        } else if (op === 'exc') {
-            msg = "Técnico excluido com sucesso.";
         }
 
         //Verificar pelo estado "4" de pronto.
         if (xhr.readyState == '4') {
             //Pegar dados da resposta json
-            document.getElementById("txtNome").value = "";
             var json = JSON.parse(xhr.responseText);
 
             if (xhr.status == '200' || xhr.status == '201') {
 
+                if (op == 'cad') {
+                    document.getElementById("txtNome").value = "";
+                }
+
                 if (op !== 'exc') {
                     document.getElementById("mensagem").innerHTML = msg;
-                } else {
-                    alert(msg);
-                    location.reload(); 
                 }
-                
+
             } else if (xhr.status == '422') {
                 var strErrosValidate = "";
 
@@ -242,10 +246,11 @@ class Categoria
             }
                     
             if (mensagem == "" && xhr != undefined) {
-                xhr.open("DELETE","http://localhost/laravel-api/public/api/v1/categorias"+codigo,true);
+                xhr.open("DELETE","http://localhost/laravel-api/public/api/v1/categorias/"+codigo,true);
                 xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
                 xhr.onreadystatechange = function() {
                     Tecnico.callbackCadAltDel(xhr, 'exc');
+                    location.reload();
                 }
 
             var jwtoken = '';
@@ -314,7 +319,7 @@ class Categoria
         var xhr = Ajax.createXHR();
 
         if(mensagem == "" && xhr != undefined) {
-            xhr.open("PUT","http://localhost/laravel-api/public/api/v1/categorias"+codigo,true);
+            xhr.open("PUT","http://localhost/laravel-api/public/api/v1/categorias/"+codigo,true);
             xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
             xhr.onreadystatechange = function() {
                 Categoria.callbackCadAltDel(xhr, 'alt');
