@@ -1,0 +1,105 @@
+<!DOCTYPE html> 
+<html lang="pt-br">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Cat&aacute;logo de Jogos</title>
+        <link rel="stylesheet" type="text/css" href="../../css/layoutadm.css" />
+        
+        <script type="text/javascript" src="../../javascript/scripts.min.js"></script>
+
+        <script type="text/javascript">
+            location.queryString = {};
+
+            location.search.substr(1).split("&").forEach(function (pair) {
+                if (pair === "") return;
+                var parts = pair.split("=");
+                location.queryString[parts[0]] = parts[1] &&
+                    decodeURIComponent(parts[1].replace(/\+/g, " "));
+            });
+            
+            document.addEventListener('DOMContentLoaded', function() {
+                var codigo = location.queryString.codigo;
+                Time.carregaDivisao(codigo);
+                Time.carregaCategoria(codigo);
+                Time.carregaTecnico(codigo);
+                Time.listaNomePorCodigo(codigo);
+                document.getElementById("codigo").value = codigo;
+            });
+        </script>
+    </head>
+
+    <body>
+        <div id="geral">
+            <div id="cabecalho">
+            </div>
+
+            <header>
+                <nav id="menu_superior">
+                    <a href="../paginas/home.php">Home</a> ::
+                    <a href="../paginas/cadastros.php">Cadastros</a> ::
+                    <a href="../paginas/administrar.php">Administrar</a> ::
+                    <a href="../paginas/consultas.php">Consultas</a> ::
+                    <a href="logout.php">Sair</a>
+                </nav>
+            </header>
+
+            <div id="conteudo">
+                <h2 class="titulo">Alterar Dados de Time</h2>
+
+                <form id="frmTime" name="frmTime" class="form">
+                    <table>
+                        <tr>
+                            <td>Nome:</td>
+                            <td>
+                                <input type="text" id="txtNome" name="txtNome" />
+                            </td>
+                        </tr>
+						
+					    <tr>
+                        	<td>Capa: </td>
+                        	<td>
+                           		<input type="file" name="txtFoto" id="txtFoto" />
+                        	</td>
+                        </tr>
+                            
+                        <tr>
+                        	<td>Divis&atilde;o: </td>
+                            <td>
+                            	<select name="cmbDivisao" id="cmbDivisao">
+                                </select>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Categoria: </td>
+                            <td>
+                                <select name="cmbCategoria" id="cmbCategoria">
+                                </select>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Tecnico: </td>
+                            <td>
+                                <select name="cmbTecnico" id="cmbTecnico">
+                                </select>
+                            </td>                             
+                        </tr>
+
+                        <tr>
+                            <td colspan="2">
+                                <input type="hidden" name="acao" value="2" />
+                                <input type="submit" name="btnAlterar" value="Alterar" id="btnAlterar" onclick="Time.atualizar(frmTime)" />
+                                <input type="reset" name="btnLimpar" value="Limpar" id="btnLimpar" />
+                            </td>
+                        </tr>
+                    </table>
+                    <input type="hidden" id="codigo" name="codigo" />
+                </form>
+            </div>
+
+            <footer id="rodape">
+            </footer>       	
+        </div>
+    </body>
+</html>

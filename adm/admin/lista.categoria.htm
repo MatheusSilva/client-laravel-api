@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html> 
+<html lang="pt-br">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Cat&aacute;logo de Jogos</title>
+        <link rel="stylesheet" type="text/css" href="../../css/layoutadm.css" />
+
+        <script type="text/javascript" src="../../javascript/scripts.min.js"></script>
+
+        <script type="text/javascript">
+            document.addEventListener('DOMContentLoaded', function() {
+                Categoria.consultar(null);
+            });
+        </script>
+    </head>
+	
+    <body>
+        <div id="geral">
+            <div id="cabecalho">
+            </div>
+
+            <header>
+                <nav id="menu_superior">
+                    <a href="../paginas/home.php">Home</a> ::
+                    <a href="../paginas/cadastros.php">Cadastros</a> ::
+                    <a href="../paginas/administrar.php">Administrar</a> ::
+                    <a href="../paginas/consultas.php">Consultas</a> ::
+                    <a href="../formularios/logout.php">Sair</a>
+                </nav>
+            </header>
+
+            <div id="conteudo">
+                <h2 class="titulo">Lista de Categoria</h2> 
+
+                <div id="ajax-loader" align="center" style="display:none"><br/> <img src="../../img/ajax-loader.gif" width="32px" /></div>
+                           
+                <div id="tabela" name="tabela"></div>
+            </div>
+
+            <footer id="rodape">
+            </footer>       	
+        </div>
+    </body>
+</html>

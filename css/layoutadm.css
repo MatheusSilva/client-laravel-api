@@ -1,0 +1,105 @@
+body {
+	background-color:#000000;
+	color:#FFFFFF;
+}
+
+div {
+	font-family:"Courier New", Courier, monospace,arial;
+}
+
+.readonly {
+    background-color:#C0C0C0;
+}
+
+#geral {
+	width:auto;
+	margin:auto;
+}
+
+#cabecalho {
+	height:132px;
+	background-image:url(../img/header.jpg);
+}
+
+#menu_superior {
+	background-color:#3399FF;
+	height:25px;
+	color:#FFFFFF;
+}
+
+#menu_superior a {
+	text-decoration:none;
+	color:#FFFFFF;
+	font-weight:bold;
+}
+
+#menu_superior a:hover {
+	text-decoration:underline;
+	color:#FFFF00;
+}
+
+#conteudo {
+    overflow:auto;
+	background-color:#000000;
+	color:#FFFFFF;
+	text-align:justify;
+}
+
+#conteudo a {
+	color:#FFFFFF;
+	text-decoration:none;
+}
+
+#conteudo a:hover {
+	text-decoration:underline;
+}
+
+#rodape::before {
+	position: absolute;   /* posição absoluta */
+	bottom: 0;   /* Fixa a div no fim da página */
+	width: 100%;   /* Largura estende por toda página da div */
+	height: 200px;   /* Altura da div */
+	height:15px;
+	font-size:12px;
+	text-align:center;
+	background-color:#3399FF;
+	color:#FFFFFF;
+    content: "Sistema Desenvolvido por Matheus Silva";
+}
+
+#tabela {
+	position: absolute;
+	width: 100%;
+	left: 10%;
+}
+
+.primeira_linha {
+	background-color:#C0C0C0;
+	color:#FFFFFF;
+	font-weight:bold;
+}
+
+.linha_par {
+	background-color:#0000FF;
+}
+
+.linha_impar {
+	background-color:#FF0000;
+}
+
+.linha_par:hover, .linha_impar:hover {
+	background-color:#00FF00;
+}
+
+.lista {
+	text-align:center;
+}
+
+.titulo {
+	text-align:center;
+}
+
+#form, .form {
+	display: table;
+	margin: 0 auto;
+}

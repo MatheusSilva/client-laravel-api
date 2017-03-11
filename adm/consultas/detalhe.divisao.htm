@@ -1,0 +1,73 @@
+<!DOCTYPE html> 
+<html lang="pt-br">
+	<head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Cat&aacute;logo de Jogos</title>
+        <link rel="stylesheet" type="text/css" href="../../css/layoutadm.css" />
+        
+        <script type="text/javascript" src="../../javascript/scripts.min.js"></script>
+        
+        <script type="text/javascript">
+            document.addEventListener('DOMContentLoaded', function() {
+                location.queryString = {};
+                location.search.substr(1).split("&").forEach(function (pair) {
+                    if (pair === "") return;
+                    var parts = pair.split("=");
+                    location.queryString[parts[0]] = parts[1] &&
+                        decodeURIComponent(parts[1].replace(/\+/g, " "));
+                });
+
+                var xhr = Ajax.createXHR();
+                var token  = Login.getCookie('token');
+                var consulta = "";
+
+                if (token !== "") {
+                    consulta = "&tk="+token;
+                }
+
+                xhr.open("GET","http://localhost/sistemaRest/api/v1/controller/divisao.php?a=2&id="+location.queryString.codigo+consulta,true);
+                    
+                xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+                xhr.onreadystatechange = function() {
+                    //Verificar pelo estado "4" de pronto.
+
+                    if (xhr.readyState == '4' && xhr.status == '200') {
+                        //Pegar dados da resposta json
+                        var data = JSON.parse(xhr.responseText);
+                        document.getElementById("codigo").value = data.codigo_divisao;
+                        document.getElementById("txtNome").value = data.nome;
+                    }
+                }
+
+                xhr.send();
+            });
+        </script>
+	</head>
+	
+	<body>
+		<div id="geral">
+			<div id="cabecalho">
+			</div>
+			
+            <header>
+                <nav id="menu_superior">
+                    <a href="../paginas/home.php">Home</a> ::
+                    <a href="../paginas/cadastros.php">Cadastros</a> ::
+                    <a href="../paginas/administrar.php">Administrar</a> ::
+                    <a href="../paginas/consultas.php">Consultas</a> ::
+                    <a href="../formularios/logout.php">Sair</a>
+                </nav>
+            </header>
+			
+			<div id="conteudo" class="form">
+				<h2 class="titulo">Detalhe de divisao</h2>
+                                <label for="codigo">Codigo:</label> <input type="text" readonly id="codigo" class="readonly" />
+                                <br />
+                                <label for="txtNome">Nome:</label> <input type="text" readonly id="txtNome" class="readonly" />
+			</div>
+			
+			<footer id="rodape">
+            </footer>
+		</div>
+	</body>
+</html>

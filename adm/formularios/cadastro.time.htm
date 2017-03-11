@@ -1,0 +1,110 @@
+<!DOCTYPE html> 
+<html lang="pt-br">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Cat&aacute;logo de times</title>
+        <link rel="stylesheet" type="text/css" href="../../css/layoutadm.css" />
+        
+        <script type="text/javascript" src="../../javascript/scripts.min.js"></script>
+        
+        <script type="text/javascript">
+            Time.carregaDivisao();
+            Time.carregaCategoria();
+            Time.carregaTecnico();
+        </script>
+    </head>
+
+    <body>
+        <div id="geral">
+            <div id="cabecalho">
+            </div>
+
+            <header>
+                <nav id="menu_superior">
+                    <a href="../paginas/home.php">Home</a> ::
+                    <a href="../paginas/cadastros.php">Cadastros</a> ::
+                    <a href="../paginas/administrar.php">Administrar</a> ::
+                    <a href="../paginas/consultas.php">Consultas</a> ::
+                    <a href="logout.php">Sair</a>
+                </nav>
+            </header>
+
+            <div id="conteudo">
+
+                <h2 class="titulo">Cadastro de Times</h2>
+
+                <form id="frmTime" name="frmTime" class="form">
+                    <table>
+                        <tr>
+                            <td width="251">Nome do Time: </td>
+                            <td width="242">
+                                <input type="text" name="txtNome" id="txtNome" />
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Capa: </td>
+                            <td>
+                                <input type="file" name="txtFoto" id="txtFoto" />
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Divis&atilde;o: </td>
+                            <td>
+                                <select id="cmbDivisao" name="cmbDivisao"></select>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Categoria: </td>
+                            <td>
+                                <select name="cmbCategoria" id="cmbCategoria"></select>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Tecnico: </td>
+                            <td>
+                                <select id="cmbTecnico" name="cmbTecnico"></select>
+                            </td>                             
+                        </tr>
+
+                        <tr> 
+                            <td>Desempenho do time:</td>
+                            <td>
+                                <input name="rDesempenhotime" type="radio" value="3"/> <label>Otimo</label>
+                                <input name="rDesempenhotime" type="radio" value="2" checked="true"/> <label>Regular</label>
+                                <input name="rDesempenhotime" type="radio" value="1"/> <label>Ruim</label>
+                            </td>
+                        </tr>
+
+                        <tr> 
+                            <td> comprar novos jogadores:</td>
+                            <td>
+                                <input type="radio" name="rComprarnovojogador" value="1" checked="true" /> <label>Sim</label>
+                                <input type="radio" name="rComprarnovojogador" value="0" /> <label>Não</label>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td height="41" colspan="2">&nbsp;</td>    
+                        </tr>
+
+                        <tr>
+                            <td colspan="2">
+                                <input type="hidden" name="acao" value="1" />
+                                <input type="submit" name="btnCadastrar" id="btnCadastrar" value="Cadastrar" onclick="Time.cadastrar(frmTime)"/>
+                                <input type="reset" name="btnLimpar" id="btnLimpar" value="Limpar" />                            
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+
+            <footer id="rodape">
+            </footer>       	
+        </div>
+    </body>
+
+</html>
