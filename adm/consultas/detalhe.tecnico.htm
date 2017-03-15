@@ -8,15 +8,9 @@
         
         <script type="text/javascript">
             document.addEventListener('DOMContentLoaded', function() {
-                Login.logado();
+                Util.logado();
                 
-                location.queryString = {};
-                location.search.substr(1).split("&").forEach(function (pair) {
-                    if (pair === "") return;
-                    var parts = pair.split("=");
-                    location.queryString[parts[0]] = parts[1] &&
-                        decodeURIComponent(parts[1].replace(/\+/g, " "));
-                });
+                Util.queryString();
 
                 Tecnico.detalhe(location.queryString.codigo);
             });
@@ -30,11 +24,11 @@
     			
             <header>
                 <nav id="menu_superior">
-                    <a href="../paginas/home.php">Home</a> ::
-                    <a href="../paginas/cadastros.php">Cadastros</a> ::
-                    <a href="../paginas/administrar.php">Administrar</a> ::
-                    <a href="../paginas/consultas.php">Consultas</a> ::
-                    <a href="../formularios/logout.php">Sair</a>
+                    <a href="../paginas/home.htm">Home</a> ::
+                    <a href="../paginas/cadastros.htm">Cadastros</a> ::
+                    <a href="../paginas/administrar.htm">Administrar</a> ::
+                    <a href="../paginas/consultas.htm">Consultas</a> ::
+                    <a href="../formularios/logout.htm">Sair</a>
                 </nav>
             </header>
     			

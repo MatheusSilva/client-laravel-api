@@ -8,7 +8,7 @@
         <script type="text/javascript">
             document.addEventListener('DOMContentLoaded', function() {
                 var dhtml = "";
-                var xhr = Ajax.createXHR();
+                var xhr = Util.createXHR();
                 xhr.open("GET", "http://localhost/sistemaRest/api/v1/controller/time.php", true);
                 xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 
@@ -62,10 +62,10 @@
             </div>
 
             <div id="menu_superior">
-                <a href="../paginas/home.html">Home</a> ::
-                <a href="../../adm/formularios/cadastro.torcedor.php">Cadastrar-se</a> ::
-                <a href="lista.time.html">Consultas</a> ::            
-                <a href="../../adm/paginas/home.php">Entrar</a>
+                <a href="../paginas/home.htm">Home</a> ::
+                <a href="../../adm/formularios/cadastro.torcedor.htm">Cadastrar-se</a> ::
+                <a href="lista.time.htm">Consultas</a> ::            
+                <a href="../../adm/paginas/home.htm">Entrar</a>
             </div>
 
             <div id="conteudo" class="form">

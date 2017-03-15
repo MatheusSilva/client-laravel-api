@@ -47,7 +47,7 @@ class Tecnico
 
     static detalhe(codigo)
     {
-        var xhr = Ajax.createXHR();
+        var xhr = Util.createXHR();
         xhr.open("GET","http://localhost/laravel-api/public/api/v1/tecnicos/"+codigo,true);
         xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
         xhr.onreadystatechange = function() {
@@ -67,7 +67,7 @@ class Tecnico
         }
 
         var jwtoken = '';
-        jwtoken = Login.getCookie('token');
+        jwtoken = Util.getCookie('token');
 
         xhr.setRequestHeader('Authorization', 'Bearer ' + jwtoken);
         xhr.send();
@@ -75,12 +75,12 @@ class Tecnico
 
     static consultar(form)
     {
-        var xhr = Ajax.createXHR();
+        var xhr = Util.createXHR();
 
         var url = "http://localhost/laravel-api/public/api/v1/tecnicos";
 
         if (form != null && form.txtNome.value != undefined && form.txtNome.value != '') {
-            url += "?key-search="+form.txtNome.value;
+            url += "/search?key-search="+form.txtNome.value;
         }
             
         if(xhr != undefined) {
@@ -188,7 +188,7 @@ class Tecnico
             //Enviar
 
             var jwtoken = '';
-            jwtoken = Login.getCookie('token');
+            jwtoken = Util.getCookie('token');
 
             xhr.setRequestHeader('Authorization', 'Bearer ' + jwtoken);
             xhr.send();
@@ -291,7 +291,7 @@ class Tecnico
 
     static confirmar(codigo)
     {
-        var xhr = Ajax.createXHR();
+        var xhr = Util.createXHR();
         var ok = window.confirm("Você tem certeza que deseja excluir?");
 
         if (ok && xhr != undefined) {		
@@ -310,7 +310,7 @@ class Tecnico
                 }
 
                 var jwtoken = '';
-                jwtoken = Login.getCookie('token');
+                jwtoken = Util.getCookie('token');
 
                 xhr.setRequestHeader('Authorization', 'Bearer ' + jwtoken);
                 xhr.send();
@@ -333,7 +333,7 @@ class Tecnico
             mensagem += "<br /><b>Você não preencheu a técnico.</b>";
         }
         
-        var xhr = Ajax.createXHR();
+        var xhr = Util.createXHR();
 
         if (mensagem == "" && xhr != undefined) {
             xhr.open("POST","http://localhost/laravel-api/public/api/v1/tecnicos", true);
@@ -344,7 +344,7 @@ class Tecnico
             }
 
             var jwtoken = '';
-            jwtoken = Login.getCookie('token');
+            jwtoken = Util.getCookie('token');
 
             xhr.setRequestHeader('Authorization', 'Bearer ' + jwtoken);
             xhr.send(Tecnico.formToJSON(form));
@@ -368,7 +368,7 @@ class Tecnico
             mensagem += "<br /><b>Você não preencheu a técnico</b>";
         }
 
-        var xhr = Ajax.createXHR();
+        var xhr = Util.createXHR();
         
         if(mensagem == "" && xhr != undefined) {
             xhr.open("PUT","http://localhost/laravel-api/public/api/v1/tecnicos/"+codigo,true);
@@ -378,7 +378,7 @@ class Tecnico
             }
 
             var jwtoken = '';
-            jwtoken = Login.getCookie('token');
+            jwtoken = Util.getCookie('token');
 
             xhr.setRequestHeader('Authorization', 'Bearer ' + jwtoken);
             xhr.send(Tecnico.formToJSON(form));

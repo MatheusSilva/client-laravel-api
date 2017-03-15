@@ -1,8 +1,8 @@
 
 
 var js  = [
-    '/var/www/html/client-laravel-api/javascript/ajax.js'
-    ,'/var/www/html/client-laravel-api/javascript/valida_login.js'
+    '/var/www/html/client-laravel-api/javascript/util.js'
+    ,'/var/www/html/client-laravel-api/javascript/login.js'
     ,'/var/www/html/client-laravel-api/javascript/categoria.js'
     ,'/var/www/html/client-laravel-api/javascript/divisao.js'
     ,'/var/www/html/client-laravel-api/javascript/time.js'

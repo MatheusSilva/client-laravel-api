@@ -13,10 +13,10 @@
 			
 			<header>
 		    	<nav id="menu_superior">
-	                <a href="../paginas/home.php">Home</a> ::
-	                <a href="../paginas/cadastros.php">Cadastros</a> ::
-	                <a href="../paginas/consultas.php">Consultas</a> ::
-		       		<a href="../formularios/logout.php">Sair</a>
+	                <a href="../paginas/home.htm">Home</a> ::
+	                <a href="../paginas/cadastros.htm">Cadastros</a> ::
+	                <a href="../paginas/consultas.htm">Consultas</a> ::
+		       		<a href="../formularios/logout.htm">Sair</a>
 		    	</nav>
       		</header>
 			

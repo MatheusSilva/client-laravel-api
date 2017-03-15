@@ -8,17 +8,11 @@
         <script type="text/javascript" src="../../javascript/scripts.min.js"></script>
 
         <script type="text/javascript">
-            location.queryString = {};
-
-            location.search.substr(1).split("&").forEach(function (pair) {
-                if (pair === "") return;
-                var parts = pair.split("=");
-                location.queryString[parts[0]] = parts[1] &&
-                    decodeURIComponent(parts[1].replace(/\+/g, " "));
-            });
-            
             document.addEventListener('DOMContentLoaded', function() {
-                Login.logado();
+                Util.logado();
+                
+                Util.queryString();
+
                 var codigo = location.queryString.codigo;
                 Time.carregaDivisao(codigo);
                 Time.carregaCategoria(codigo);
@@ -36,11 +30,11 @@
 
             <header>
                 <nav id="menu_superior">
-                    <a href="../paginas/home.php">Home</a> ::
-                    <a href="../paginas/cadastros.php">Cadastros</a> ::
-                    <a href="../paginas/administrar.php">Administrar</a> ::
-                    <a href="../paginas/consultas.php">Consultas</a> ::
-                    <a href="logout.php">Sair</a>
+                    <a href="../paginas/home.htm">Home</a> ::
+                    <a href="../paginas/cadastros.htm">Cadastros</a> ::
+                    <a href="../paginas/administrar.htm">Administrar</a> ::
+                    <a href="../paginas/consultas.htm">Consultas</a> ::
+                    <a href="logout.htm">Sair</a>
                 </nav>
             </header>
 

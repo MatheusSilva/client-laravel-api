@@ -20,7 +20,7 @@ class Categoria
 
     static detalhe(codigo)
     {
-        var xhr = Ajax.createXHR();
+        var xhr = Util.createXHR();
         xhr.open("GET","http://localhost/laravel-api/public/api/v1/categorias/"+codigo,true);
         xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
         xhr.onreadystatechange = function() {
@@ -35,7 +35,7 @@ class Categoria
         }
 
         var jwtoken = '';
-        jwtoken = Login.getCookie('token');
+        jwtoken = Util.getCookie('token');
 
         xhr.setRequestHeader('Authorization', 'Bearer ' + jwtoken);
         xhr.send();
@@ -47,10 +47,10 @@ class Categoria
         //var url = "http://127.0.0.1:8084/restful/cliente/listarTodos";
 
         if (form != null && form.txtNome.value != undefined && form.txtNome.value != '') {
-            url += "?key-search="+form.txtNome.value;
+            url += "/search?key-search="+form.txtNome.value;
         }
 
-        var xhr = Ajax.createXHR();
+        var xhr = Util.createXHR();
 
         if(xhr != undefined){
             //Montar requisição
@@ -165,7 +165,7 @@ class Categoria
             //Enviar
 
             var jwtoken = '';
-            jwtoken = Login.getCookie('token');
+            jwtoken = Util.getCookie('token');
 
             xhr.setRequestHeader('Authorization', 'Bearer ' + jwtoken);
             xhr.send();
@@ -230,14 +230,14 @@ class Categoria
 
     static confirmar(codigo)
     {
-        var xhr = Ajax.createXHR();
+        var xhr = Util.createXHR();
         var ok = window.confirm("Voce tem certeza que deseja excluir?");
 
         if (ok) {
             document.getElementById("ajax-loader").style.display='block';	
             var mensagem = "";
 
-            if (Login.getCookie('token') == "") {
+            if (Util.getCookie('token') == "") {
                 mensagem += "Token invalido";
             }
 
@@ -254,7 +254,7 @@ class Categoria
                 }
 
             var jwtoken = '';
-            jwtoken = Login.getCookie('token');
+            jwtoken = Util.getCookie('token');
 
             xhr.setRequestHeader('Authorization', 'Bearer ' + jwtoken);
                 xhr.send(); 
@@ -267,14 +267,14 @@ class Categoria
     static cadastrar(form) 
     {
         document.getElementById("mensagem").innerHTML = "<br /><b>Aguarde...</b>";
-        var xhr = Ajax.createXHR();
+        var xhr = Util.createXHR();
         var mensagem = "";
 
         if (form.txtNome.value == "") {
             mensagem += "<br /><b>Você não preencheu a categoria</b>";
         }
 
-        if (Login.getCookie('token') == "") {
+        if (Util.getCookie('token') == "") {
             mensagem += "Token invalido";
         }
 
@@ -286,7 +286,7 @@ class Categoria
             }
 
             var jwtoken = '';
-            jwtoken = Login.getCookie('token');
+            jwtoken = Util.getCookie('token');
 
             xhr.setRequestHeader('Authorization', 'Bearer ' + jwtoken);
             xhr.send(Categoria.formToJSON(form));
@@ -302,7 +302,7 @@ class Categoria
         var codigo = form.codigo.value;
         var mensagem = "";
 
-        if (Login.getCookie('token') == "") {
+        if (Util.getCookie('token') == "") {
             mensagem += "Token invalido";
         }
 
@@ -316,7 +316,7 @@ class Categoria
         
         var consulta = "";
 
-        var xhr = Ajax.createXHR();
+        var xhr = Util.createXHR();
 
         if(mensagem == "" && xhr != undefined) {
             xhr.open("PUT","http://localhost/laravel-api/public/api/v1/categorias/"+codigo,true);
@@ -326,7 +326,7 @@ class Categoria
             }
 
             var jwtoken = '';
-            jwtoken = Login.getCookie('token');
+            jwtoken = Util.getCookie('token');
 
             xhr.setRequestHeader('Authorization', 'Bearer ' + jwtoken);
             xhr.send(Categoria.formToJSON(form));

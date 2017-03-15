@@ -4,10 +4,9 @@ class Torcedor
     {
         var codigo        = '';
         var txtNome       = '';
-        var txtLogin      = '';
         var txtEmail      = '';
-        var txtSenhaAtual = '';
         var txtSenha      = '';
+        var txtSenhaAtual = '';
         var txtConfSenha  = '';
 
         if (form.id != undefined) {
@@ -26,10 +25,6 @@ class Torcedor
             txtEmail = form.txtEmail.value;
         }
 
-        if (form.txtLogin != undefined) {
-            txtLogin = form.txtLogin.value;
-        }
-
         if (form.txtSenha != undefined) {
             txtSenha = form.txtSenha.value;
         }
@@ -43,23 +38,20 @@ class Torcedor
         }
 
         return JSON.stringify({
-            "codigo":  codigo,
-            "txtNome":  txtNome,
-            "txtEmail":  txtEmail,
-            "txtLogin":  txtLogin,
-            "txtSenhaAtual" : txtSenhaAtual,
-            "txtSenha":  txtSenha,
-            "txtConfSenha": txtConfSenha
+            "name":  txtNome,
+            "email":  txtEmail,
+            "password":  txtSenha,
+            "password_confirmation":  txtConfSenha
         });
     }
 
     static ativarAutenticacao2fatores()
     {
-        var xhr = Ajax.createXHR();
+        var xhr = Util.createXHR();
         var ok = window.confirm("Você tem certeza que deseja ativar a autenticação de 2 fatores?");
 
         if (ok && xhr != undefined) {
-            var token  = Login.getCookie('token');
+            var token  = Util.getCookie('token');
             var consulta = "";
 
             if (token !== "") {
@@ -107,10 +99,10 @@ class Torcedor
 
     static pegarQrCode()
     {
-        var xhr = Ajax.createXHR();
+        var xhr = Util.createXHR();
 
         if (xhr != undefined) {
-            var token  = Login.getCookie('token');
+            var token  = Util.getCookie('token');
 
             if (token !== "") {
                 xhr.open("GET","http://localhost/sistemaRest/api/v1/controller/torcedor.php?a=5&tk="+token,true);
@@ -134,11 +126,11 @@ class Torcedor
 
     static desativarAutenticacao2fatores()
     {
-        var xhr = Ajax.createXHR();
+        var xhr = Util.createXHR();
         var ok = window.confirm("Você tem certeza que deseja desativar a autenticação de 2 fatores?");
 
         if (ok && xhr != undefined) {
-            var token  = Login.getCookie('token');
+            var token  = Util.getCookie('token');
             var consulta = "";
 
             if (token !== "") {
@@ -150,7 +142,7 @@ class Torcedor
                         //Pegar dados da resposta json
                         var json = JSON.parse(xhr.responseText);
                         alert(json.mensagem);                        
-                        window.location.href = "../paginas/home.php";
+                        window.location.href = "../paginas/home.htm";
                     }
                 }
 
@@ -163,10 +155,10 @@ class Torcedor
 
     static validaAutenticacao2fatores()
     {
-        var xhr = Ajax.createXHR();
+        var xhr = Util.createXHR();
 
         if (xhr != undefined) {
-            var token  = Login.getCookie('token');
+            var token  = Util.getCookie('token');
             var consulta = "";
             var codigoAutenticacao = document.getElementById("codAutenticacao").value;
 
@@ -188,7 +180,7 @@ class Torcedor
                         if (json.mensagem != undefined) {
                             alert(json.mensagem);
                         } else if (json.resultado == 1) {
-                            window.location.href = "../paginas/home.php";        
+                            window.location.href = "../paginas/home.htm";        
                         } else if (json.resultado == 0) {
                             alert("Código de autenticação invalido");        
                         }     
@@ -204,17 +196,125 @@ class Torcedor
         }
     }
 
+    static callbackCadAlt(xhr, op)
+    {
+        var msg = "";
+
+        if (op === 'cad') {
+            msg = "Torcedor cadastrado com sucesso.";
+        } else if (op === 'alt') {
+            msg = "Torcedor alterado com sucesso.";
+        }
+
+        //Verificar pelo estado "4" de pronto.
+        if (xhr.readyState == '4') {
+            //Pegar dados da resposta json
+            var json = JSON.parse(xhr.responseText);
+
+            if (xhr.status == '200' || xhr.status == '201') {
+               
+                if (op == 'cad') {
+                    document.getElementById("txtNome").value = "";
+                    document.getElementById("txtEmail").value = "";
+                    document.getElementById("txtSenha").value = "";
+                    document.getElementById("txtConfSenha").value = "";
+                }
+
+                if (op == 'cad' || op == 'alt') {
+                    document.getElementById("mensagem").innerHTML = msg;
+                }
+
+            } else if (xhr.status == '422') {
+                var strErrosValidate = "";
+
+                if (json.json.validate_error.name !== undefined) {
+                    strErrosValidate += json.validate_error.name[0];
+                }
+
+                if (json.json.validate_error.email !== undefined) {
+                    strErrosValidate += json.validate_error.email[0];
+                }
+
+                if (json.json.validate_error.password !== undefined) {
+                    strErrosValidate += json.validate_error.password[0];
+                }
+
+                if (strErrosValidate !== '') {
+                    document.getElementById("mensagem").innerHTML = "<br /><b>"+strErrosValidate+"</b>";    
+                } else {
+                    document.getElementById("mensagem").innerHTML = "<br /><b>Algum erro desconhecido ocorreu.</b>";
+                }
+            } else if (xhr.status == '500') {
+                if (json.error !== undefined && json.error === 'token_invalid') {
+                    document.getElementById("mensagem").innerHTML = "<br /><b>Token inválido. Faça o login novamente.</b>";
+                } else {
+                    document.getElementById("mensagem").innerHTML = "<br /><b>Algum erro desconhecido ocorreu.</b>";
+                }
+            } else if (xhr.status == '401') {
+                if (json.error !== undefined && json.error === 'token_expired') {
+                    document.getElementById("mensagem").innerHTML = "<br /><b>Token expirado. Faça o login novamente.</b>";
+                } else {
+                    document.getElementById("mensagem").innerHTML = "<br /><b>Algum erro desconhecido ocorreu.</b>";
+                }
+            } else {
+                document.getElementById("mensagem").innerHTML = "<br /><b>Algum erro desconhecido ocorreu.</b>";
+            }
+        }
+    }
+
+    static cadastrar(form) 
+    {
+        //verificar cadastro
+        document.getElementById("mensagem").innerHTML = "<br /><b>Aguarde...</b>";  
+        var xhr = Util.createXHR();
+        var mensagem = "";
+
+        if (form.txtNome.value == "") {
+            mensagem += "<br /><b>Você não preencheu o nome</b>";
+        }
+
+        if (form.txtEmail.value == "") {
+            mensagem += "<br /><b>Você não preencheu o email</b>";
+        }
+
+        if (form.txtSenha.value == "") {
+            mensagem += "<br /><b>Você não preencheu a senha</b>";
+        }
+
+        
+        if (form.txtConfSenha.value == "") {
+            mensagem += "<br /><b>Você não preencheu a confirmação da senha</b>";
+        }
+
+        if (form.txtSenha.value !== form.txtConfSenha.value) {
+            mensagem += "<br /><b>As senhas não conferem</b>";
+        }
+        
+
+        if(mensagem == "" && xhr != undefined) {
+            xhr.open("POST","http://localhost/laravel-api/public/api/v1/cadusuario",true);
+            xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+            xhr.onreadystatechange = function() {
+                Torcedor.callbackCadAlt(xhr, 'cad');
+            }
+            
+            xhr.send(Torcedor.formToJSON(form));
+        } else {
+            document.getElementById("mensagem").innerHTML = mensagem;
+        } 
+    }
+
     static atualizar(form) 
     {
         document.getElementById("mensagem").innerHTML = "<br /><b>Aguarde...</b>";  
-        var xhr = Ajax.createXHR();
+        var xhr = Util.createXHR();
         var mensagem = "";
 
         if (form.txtNome.value == "") {
             mensagem += "<br /><b>Você não preencheu a técnico</b>";
         }
         
-        var token  = Login.getCookie('token');
+        var token  = Util.getCookie('token');
         
         var consulta = "";
 
@@ -243,9 +343,9 @@ class Torcedor
 
     static insereDadosTorcedorRetornados(codigo)  
     {
-        var xhr = Ajax.createXHR();
+        var xhr = Util.createXHR();
 
-        var token  = Login.getCookie('token');
+        var token  = Util.getCookie('token');
         var consulta = "";
 
         if (token !== "") {
@@ -276,10 +376,10 @@ class Torcedor
 
     static autenticacao2fatoresEstaAtivada()
     {
-        var xhr = Ajax.createXHR();
+        var xhr = Util.createXHR();
 
         if (xhr != undefined) {
-            var token  = Login.getCookie('token');
+            var token  = Util.getCookie('token');
 
             if (token !== "") {
                 xhr.open("GET","http://localhost/sistemaRest/api/v1/controller/torcedor.php?a=4&tk="+token,true);

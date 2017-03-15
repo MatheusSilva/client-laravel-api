@@ -41,8 +41,8 @@ class Time
             pesquisa = form.txtNome.value;
         }
 
-        var xhr = Ajax.createXHR();
-        var token  = Login.getCookie('token');
+        var xhr = Util.createXHR();
+        var token  = Util.getCookie('token');
         var consulta = "";
 
         if (token !== "") {
@@ -159,7 +159,7 @@ class Time
         });
         */
         
-        var xhr = Ajax.createXHR();
+        var xhr = Util.createXHR();
 
         if (xhr != undefined) {
             var e = document.getElementById("cmbDivisao");
@@ -184,7 +184,7 @@ class Time
             jForm.append("rDesempenhotime", document.querySelector('input[name="rDesempenhotime"]:checked').value);
             jForm.append("rComprarnovojogador", document.querySelector('input[name="rComprarnovojogador"]:checked').value);
 
-            var token  = Login.getCookie('token');
+            var token  = Util.getCookie('token');
             var consulta = "&tk="+token;
 
             var assincrono = false; // true para assincrono e false para sincrono
@@ -233,7 +233,7 @@ class Time
             codigo = "&id="+codigo;
         }
         
-        var xhr = Ajax.createXHR();
+        var xhr = Util.createXHR();
 
         if (xhr != undefined) {
             var e = document.getElementById("cmbDivisao");
@@ -256,7 +256,7 @@ class Time
             jForm.append("cmbCategoria", cmbCategoria);
             jForm.append("cmbTecnico", cmbTecnico);
 
-            var token  = Login.getCookie('token');
+            var token  = Util.getCookie('token');
             var consulta = "&tk="+token;
 
             var assincrono = false; // true para assincrono e false para sincrono
@@ -290,14 +290,14 @@ class Time
                 codigo = "&id="+codigo;
             }
 
-            var token  = Login.getCookie('token');
+            var token  = Util.getCookie('token');
             var consulta = "";
 
             if (token !== "") {
                 consulta = "&tk="+token;
             }
             
-            var xhr = Ajax.createXHR();
+            var xhr = Util.createXHR();
             
             if (mensagem === "" && xhr != undefined) {
                 xhr.open("GET","http://localhost/sistemaRest/api/v1/controller/time.php?a=5"+codigo+consulta,true);
@@ -321,8 +321,8 @@ class Time
 
     static listaTodosTimes()
     {
-        var xhr = Ajax.createXHR();
-        var token  = Login.getCookie('token');
+        var xhr = Util.createXHR();
+        var token  = Util.getCookie('token');
 
         if(xhr != undefined) {
             //Montar requisição
@@ -395,8 +395,8 @@ class Time
 
     static listaNomePorCodigo(codigoParam)
     {
-        var xhr = Ajax.createXHR();
-        var token  = Login.getCookie('token');
+        var xhr = Util.createXHR();
+        var token  = Util.getCookie('token');
         var consulta = "";
 
         if (token !== "") {
@@ -422,8 +422,8 @@ class Time
 
     static carregaDivisao(codigo)
     {
-        var xhr = Ajax.createXHR();
-        var token  = Login.getCookie('token');
+        var xhr = Util.createXHR();
+        var token  = Util.getCookie('token');
         var consulta = "";
 
         if (token !== "") {
@@ -477,7 +477,7 @@ class Time
 
     static carregaCategoria(codigo)
     {
-        var xhr = Ajax.createXHR();
+        var xhr = Util.createXHR();
 
         if(xhr != undefined) {
             if (codigo == undefined) {
@@ -516,15 +516,15 @@ class Time
                 }
             }
 
-            xhr.setRequestHeader('tk', Login.getCookie('token'));
+            xhr.setRequestHeader('tk', Util.getCookie('token'));
             xhr.send(); 
         }
     }
 
     static carregaTecnico(codigo)
     {
-        var xhr = Ajax.createXHR();
-        var token  = Login.getCookie('token');
+        var xhr = Util.createXHR();
+        var token  = Util.getCookie('token');
         var consulta = "";
 
         if (token !== "") {

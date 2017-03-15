@@ -14,32 +14,22 @@
 			
 			<header>
                 <nav id="menu_superior">
-                    <a href="../../site/paginas/home.html">Home</a> ::
-		            <a href="../formularios/cadastro.torcedor.php">Cadastrar-se</a> ::
-		            <a href="../../site/consultas/lista.time.html">Consultas</a> ::            
-		            <a href="../../adm/paginas/home.php">Entrar</a>
+                    <a href="../../site/paginas/home.htm">Home</a> ::
+		            <a href="../formularios/cadastro.torcedor.htm">Cadastrar-se</a> ::
+		            <a href="../../site/consultas/lista.time.htm">Consultas</a> ::            
+		            <a href="../../adm/paginas/home.htm">Entrar</a>
                 </nav>
             </header>
 			
 			<div id="conteudo" class="form">
 				<h2 class="titulo">Cadastro de Torcedores</h2>
 					
-				<form method="post" 
-				action="../adaptadores/adaptador.torcedor.php"
-				name="frmCadastro"
-				id="frmCadastro" onSubmit="">
+				<form class="form" id="frmCadastro" name="frmCadastro">
 					<table>
 						<tr>
 							<td>Nome:</td>
 							<td>
 								<input type="text" name="txtNome" id="txtNome" />
-							</td>
-						</tr>
-						
-						<tr>
-							<td>Login:</td>
-							<td>
-								<input type="text" name="txtLogin" id="txtLogin" />
 							</td>
 						</tr>
 
@@ -67,10 +57,8 @@
 						<tr>
 							<td colspan="2">
 								<input type="hidden" name="acao" value="1" />
-								
-								
-								<input type="submit" name="btnCadastrar" 
-									value="Cadastrar" id="btnCadastrar"/>
+
+								<input id="btnCadastrar" type="button" value="Cadastrar" onclick="Torcedor.cadastrar(frmCadastro)" />
 									
 								<input type="reset" name="btnLimpar"
 									value="Limpar" id="btnLimpar" />
@@ -79,12 +67,8 @@
 					</table>
 				</form>
 				
-				<?php
-                if (isset($_GET['msg'])) {
-                    echo urldecode($_GET['msg']);
-                }
-                ?>
-
+				<div id="mensagem"></div>
+				
 			</div>
 			
 			<footer id="rodape">
