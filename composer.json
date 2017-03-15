@@ -1,11 +1,6 @@
 {
 	"require": {
-        "respect/validation": "1.*"
-        ,"matthiasmullie/minify": "1.*"
-        ,"christian-riesen/otp": "2.*"
-        ,"swiftmailer/swiftmailer": "5.*"
-        ,"slim/slim": "3.*"
-        ,"doctrine/orm": "2.*"
+        "matthiasmullie/minify": "1.*"
     },
 	"autoload": {
 		"psr-0": {
