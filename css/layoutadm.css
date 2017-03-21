@@ -54,12 +54,11 @@ div {
 	text-decoration:underline;
 }
 
-#rodape::before {
+footer::before {
 	position: absolute;   /* posição absoluta */
 	bottom: 0;   /* Fixa a div no fim da página */
 	width: 100%;   /* Largura estende por toda página da div */
-	height: 200px;   /* Altura da div */
-	height:15px;
+	height: 15px;   /* Altura da div */
 	font-size:12px;
 	text-align:center;
 	background-color:#3399FF;
@@ -67,28 +66,33 @@ div {
     content: "Sistema Desenvolvido por Matheus Silva";
 }
 
+@-moz-document url-prefix() {
+  fieldset { display: table-cell; }
+}
+
 #tabela {
-	position: absolute;
-	width: 100%;
-	left: 10%;
+	width:70%; 
+	overflow:hidden;
+	margin-left: auto ;  
+	margin-right: auto ;
 }
 
-.primeira_linha {
-	background-color:#C0C0C0;
-	color:#FFFFFF;
-	font-weight:bold;
+.table {
+	table-layout: fixed;
+	word-wrap: break-word;
+	margin: 20px;
 }
 
-.linha_par {
-	background-color:#0000FF;
+.table th {
+   text-align: center;   
 }
 
-.linha_impar {
-	background-color:#FF0000;
+.table td {
+   text-align: center;   
 }
 
-.linha_par:hover, .linha_impar:hover {
-	background-color:#00FF00;
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+  background-color: #00FF00;
 }
 
 .lista {

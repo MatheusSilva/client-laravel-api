@@ -1,12 +1,92 @@
 <!DOCTYPE html> 
 <html lang="pt-br">
 	<head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta charset="utf-8">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Cat&aacute;logo de Jogos</title>
         <link rel="stylesheet" type="text/css" href="../../css/layoutadm.css" />
+
         <script type="text/javascript" src="../../javascript/scripts.min.js"></script>
 		<script type="text/javascript">
 			Util.logado();
+		</script>
+
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="../../css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u">
+
+		<!-- Optional theme -->
+		<link rel="stylesheet" href="../../css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp">
+
+		<!-- Latest compiled and minified Jquery --> 	
+		<script src="../../javascript/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="></script>
+ 	    
+		<!-- Latest compiled and minified JavaScript -->
+		<script src="../../javascript/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"></script>
+
+		<link rel="stylesheet" type="text/css" href="../../css/jquery.dataTables.min.css"/>
+ 
+		<script type="text/javascript" src="../../javascript/jquery.dataTables.min.js"></script>
+
+		<script src="../../javascript/TableTools.min.js"></script>
+
+		<script src="../../javascript/dataTables.select.min.js"></script>
+
+
+		<script type="text/javascript">
+
+		    jQuery(document).ready(function() {
+		    	var jwtoken = '';
+        		jwtoken = Util.getCookie('token');
+
+		         $('#tabela01').dataTable( {
+		          processing: true,
+		          serverSide: true,
+		      	  dom: "Bfrtip",		
+		          ajax : {
+		             "url": 'http://localhost/laravel-api/public/api/v1/categorias',
+		             "dataType": 'json',
+		             "type": "GET",
+		             "beforeSend": function(xhr){
+		                xhr.setRequestHeader('Authorization', 'Bearer ' + jwtoken);
+		             }
+		          },
+		          columns: [
+		            {
+		            "class": "details-control",
+		            "orderable": false,
+		            "data": null, render: function ( data, type, row ) {
+                		// Combine the first and last names into a single table field
+                		detalhes = "<a href=\"../consultas/detalhe.categoria.htm?codigo="
+                            + data.codigo_categoria
+                            + "\">[D]</a>";
+
+                            alterar = "<a href=\"../formularios/alterar.categoria.htm?codigo="
+                            + data.codigo_categoria
+                            + "\">[A]</a>";
+
+                            excluir = "<a href=\"javascript:Categoria.confirmar("
+                            + data.codigo_categoria
+                            + ")\">[X]</a>";
+
+                            return detalhes+alterar+excluir;
+            		}, 
+		            "defaultContent": "",
+		            },
+
+		            { "data": "codigo_categoria" },
+		            { "data": "nome" },
+		          ],
+		          select: true,
+		          
+		          'language': {
+                    'url': 'https://cdn.datatables.net/plug-ins/380cb78f450/i18n/Portuguese-Brasil.json'
+                  }
+		          
+		       });
+
+		    });
 		</script>
 	</head>
 	
@@ -25,20 +105,31 @@
                 </nav>
             </header>
 			
-			<div id="conteudo">
+			<div name="conteudo" class="container-fluid">
 				<h2 class="titulo">Consulta por nome as categorias</h2>
-				<form class="form" id="frmCategoria" name="frmCategoria">
-					Nome: <input type="text" name="txtNome" id="txtNome" />
-					<input type="button" id="btnConsultar" name="btnConsultar" value="Consultar" onclick="Categoria.consultar(frmCategoria)" />
-				</form>         
 				
 				<div id="ajax-loader" align="center" style="display:none"><br/> <img src="../../img/ajax-loader.gif" width="32px" /></div>
 
-				<div id="tabela" name="tabela"></div>	
+				<table id="tabela01" class="display" cellspacing="0" width="100%">
+			        <thead>
+			            <tr>
+			            	<th>A&ccedil;&otilde;es</th>
+			                <th>C&oacute;digo</th>
+			                <th>Nome</th>
+			            </tr>
+			        </thead>
+			        <tfoot>
+			            <tr>
+			            	<th>A&ccedil;&otilde;es</th>
+			                <th>C&oacute;digo</th>
+			                <th>Nome</th>
+			            </tr>
+			        </tfoot>
+		   		</table>	
+
 			</div>
 			
-			<footer id="rodape">
-            </footer>       	
+			<footer></footer>       	
 		</div>
 	</body>
 </html>
