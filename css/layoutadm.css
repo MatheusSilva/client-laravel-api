@@ -1,6 +1,8 @@
 body {
 	background-color:#000000;
 	color:#FFFFFF;
+	width:auto;
+	margin:auto;
 }
 
 div {
@@ -11,29 +13,25 @@ div {
     background-color:#C0C0C0;
 }
 
-#geral {
-	width:auto;
-	margin:auto;
-}
-
-#cabecalho {
+#headerimg {
 	height:132px;
+	width:100%;
 	background-image:url(../img/header.jpg);
 }
 
-#menu_superior {
+header nav {
 	background-color:#3399FF;
 	height:25px;
 	color:#FFFFFF;
 }
 
-#menu_superior a {
+header nav a {
 	text-decoration:none;
 	color:#FFFFFF;
 	font-weight:bold;
 }
 
-#menu_superior a:hover {
+header nav a:hover {
 	text-decoration:underline;
 	color:#FFFF00;
 }
@@ -55,32 +53,39 @@ div {
 }
 
 footer::before {
-	position: absolute;   /* posição absoluta */
+    position: absolute;   /* posição absoluta */
 	bottom: 0;   /* Fixa a div no fim da página */
 	width: 100%;   /* Largura estende por toda página da div */
-	height: 15px;   /* Altura da div */
-	font-size:12px;
+	height: 200px;   /* Altura da div */
+	height:15px;
+	font-size:14px;
 	text-align:center;
-	background-color:#3399FF;
-	color:#FFFFFF;
-    content: "Sistema Desenvolvido por Matheus Silva";
+	color:#3399FF;
+	content: "Sistema Desenvolvido por Matheus Silva";
 }
 
 @-moz-document url-prefix() {
   fieldset { display: table-cell; }
 }
 
-#tabela {
-	width:70%; 
-	overflow:hidden;
-	margin-left: auto ;  
-	margin-right: auto ;
+tr th {
+	/*muda para branco a cor da fonte para todos elementos tr que tenham um elemento th
+	, em outras palavras deixa em cor branco o cabeçalho e rodape da tabela*/
+	color:#000000; 
 }
 
 .table {
+	overflow:hidden;
+	margin-left: auto ;  
+	margin-right: auto ;
+	color:#000000;
 	table-layout: fixed;
 	word-wrap: break-word;
 	margin: 20px;
+}
+
+.dataTables_info{
+	margin-left: 40px;
 }
 
 .table th {
@@ -88,11 +93,15 @@ footer::before {
 }
 
 .table td {
-   text-align: center;   
+   text-align: left;   
 }
 
 .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
   background-color: #00FF00;
+}
+
+.acao{
+	width: 50%;
 }
 
 .lista {
@@ -101,6 +110,8 @@ footer::before {
 
 .titulo {
 	text-align:center;
+	color:#000000;
+	font-weight:bold;
 }
 
 #form, .form {

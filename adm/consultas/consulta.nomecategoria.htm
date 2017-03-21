@@ -13,19 +13,15 @@
 			Util.logado();
 		</script>
 
-		<!-- Latest compiled and minified CSS -->
 		<link rel="stylesheet" href="../../css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u">
 
-		<!-- Optional theme -->
 		<link rel="stylesheet" href="../../css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp">
 
-		<!-- Latest compiled and minified Jquery --> 	
-		<script src="../../javascript/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="></script>
- 	    
-		<!-- Latest compiled and minified JavaScript -->
-		<script src="../../javascript/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"></script>
-
 		<link rel="stylesheet" type="text/css" href="../../css/jquery.dataTables.min.css"/>
+
+		<script src="../../javascript/jquery.min.js"></script>
+
+		<script src="../../javascript/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"></script>
  
 		<script type="text/javascript" src="../../javascript/jquery.dataTables.min.js"></script>
 
@@ -33,14 +29,13 @@
 
 		<script src="../../javascript/dataTables.select.min.js"></script>
 
-
 		<script type="text/javascript">
 
-		    jQuery(document).ready(function() {
+		    $(document).ready(function(){
 		    	var jwtoken = '';
         		jwtoken = Util.getCookie('token');
 
-		         $('#tabela01').dataTable( {
+		         var table = $('#tabela01').dataTable( {
 		          processing: true,
 		          serverSide: true,
 		      	  dom: "Bfrtip",		
@@ -60,16 +55,17 @@
                 		// Combine the first and last names into a single table field
                 		detalhes = "<a href=\"../consultas/detalhe.categoria.htm?codigo="
                             + data.codigo_categoria
-                            + "\">[D]</a>";
+                            + "\"><span class='glyphicon glyphicon-info-sign' aria-hidden='true'></span></a>";
 
-                            alterar = "<a href=\"../formularios/alterar.categoria.htm?codigo="
+                            alterar = "<span>  </span><a href=\"../formularios/alterar.categoria.htm?codigo="
                             + data.codigo_categoria
-                            + "\">[A]</a>";
+                            + "\"><span class='glyphicon glyphicon-edit' aria-hidden='true'></span></a>";
 
-                            excluir = "<a href=\"javascript:Categoria.confirmar("
+                            excluir = "<span>  </span><a href=\"javascript:Categoria.confirmar("
                             + data.codigo_categoria
-                            + ")\">[X]</a>";
+                            + ")\"><span class='glyphicon glyphicon-trash' aria-hidden='true'></span></a>";
 
+                            //console.log(row);
                             return detalhes+alterar+excluir;
             		}, 
 		            "defaultContent": "",
@@ -81,55 +77,55 @@
 		          select: true,
 		          
 		          'language': {
-                    'url': 'https://cdn.datatables.net/plug-ins/380cb78f450/i18n/Portuguese-Brasil.json'
+                    'url': '../../javascript/Portuguese-Brasil.json'
                   }
 		          
 		       });
 
-		    });
+		    });     
+		    
 		</script>
+
+		<noscript>Seu navegador não suporta JavaScript ou mesmo foi desabilitado!</noscript>
 	</head>
 	
 	<body>
-		<div id="geral">
-			<div id="cabecalho">
-			</div>
-			
-			<header>
-                <nav id="menu_superior">
-                    <a href="../paginas/home.htm">Home</a> ::
-					<a href="../paginas/cadastros.htm">Cadastros</a> ::
-					<a href="../paginas/administrar.htm">Administrar</a> ::
-					<a href="../paginas/consultas.htm">Consultas</a> ::
-					<a href="../formularios/logout.htm">Sair</a>
-                </nav>
-            </header>
-			
-			<div name="conteudo" class="container-fluid">
-				<h2 class="titulo">Consulta por nome as categorias</h2>
-				
-				<div id="ajax-loader" align="center" style="display:none"><br/> <img src="../../img/ajax-loader.gif" width="32px" /></div>
+		<header>
+			<div id="headerimg"></div>
 
-				<table id="tabela01" class="display" cellspacing="0" width="100%">
-			        <thead>
-			            <tr>
-			            	<th>A&ccedil;&otilde;es</th>
-			                <th>C&oacute;digo</th>
-			                <th>Nome</th>
-			            </tr>
-			        </thead>
-			        <tfoot>
-			            <tr>
-			            	<th>A&ccedil;&otilde;es</th>
-			                <th>C&oacute;digo</th>
-			                <th>Nome</th>
-			            </tr>
-			        </tfoot>
-		   		</table>	
-
-			</div>
+	        <nav>
+	            <a href="../paginas/home.htm">Home</a> ::
+				<a href="../paginas/cadastros.htm">Cadastros</a> ::
+				<a href="../paginas/administrar.htm">Administrar</a> ::
+				<a href="../paginas/consultas.htm">Consultas</a> ::
+				<a href="../formularios/logout.htm">Sair</a>
+	        </nav>
+	    </header>
+		
+		<div name="conteudo" class="container-fluid">
 			
-			<footer></footer>       	
+			
+			<div id="ajax-loader" align="center" style="display:none"><br/> <img src="../../img/ajax-loader.gif" width="32px" /></div>
+
+			<table id="tabela01" class="display table table-striped table-condensed table-bordered table-hover" cellspacing="0" width="50%">
+				<caption class="titulo">Consulta por nome as categorias</caption>
+		        <thead>
+		            <tr>
+		            	<th style="width:60px;" class="">A&ccedil;&otilde;es</th>
+		                <th style="width:60px;" class="">C&oacute;digo</th>
+		                <th>Nome</th>
+		            </tr>
+		        </thead>
+		        <tfoot>
+		            <tr>
+		            	<th style="width:60px;" class="">A&ccedil;&otilde;es</th>
+		                <th style="width:60px;" class="">C&oacute;digo</th>
+		                <th>Nome</th>
+		            </tr>
+		        </tfoot>
+	   		</table>	
 		</div>
+		
+		<footer></footer>       	
 	</body>
 </html>
