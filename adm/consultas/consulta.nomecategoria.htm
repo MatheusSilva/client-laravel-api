@@ -74,16 +74,6 @@
 		            { "data": "codigo_categoria" , name: 'codigo_categoria', "width": "60px" },
 		            { "data": "nome" },
 		          ],
-			        initComplete: function () {
-			            this.api().columns().every(function () {
-			                var column = this;
-			                var input = document.createElement("input");
-			                $(input).appendTo($(column.footer()).empty())
-			                .on('change', function () {
-			                    column.search($(this).val(), false, false, true).draw();
-			                });
-			            });
-			        },
 		          select: true,
 		          
 		          'language': {
