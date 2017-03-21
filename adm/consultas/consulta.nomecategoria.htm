@@ -71,9 +71,19 @@
 		            "defaultContent": "",
 		            },
 
-		            { "data": "codigo_categoria" },
+		            { "data": "codigo_categoria" , name: 'codigo_categoria', "width": "60px" },
 		            { "data": "nome" },
 		          ],
+			        initComplete: function () {
+			            this.api().columns().every(function () {
+			                var column = this;
+			                var input = document.createElement("input");
+			                $(input).appendTo($(column.footer()).empty())
+			                .on('change', function () {
+			                    column.search($(this).val(), false, false, true).draw();
+			                });
+			            });
+			        },
 		          select: true,
 		          
 		          'language': {
@@ -112,14 +122,14 @@
 		        <thead>
 		            <tr>
 		            	<th style="width:60px;" class="">A&ccedil;&otilde;es</th>
-		                <th style="width:60px;" class="">C&oacute;digo</th>
+		                <th>C&oacute;digo</th>
 		                <th>Nome</th>
 		            </tr>
 		        </thead>
 		        <tfoot>
 		            <tr>
 		            	<th style="width:60px;" class="">A&ccedil;&otilde;es</th>
-		                <th style="width:60px;" class="">C&oacute;digo</th>
+		                <th>C&oacute;digo</th>
 		                <th>Nome</th>
 		            </tr>
 		        </tfoot>
