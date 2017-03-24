@@ -71,12 +71,17 @@ class Divisao
 
                         var temRegistro = false;
                         
-                        var strHTML     = '<table width="80%" class="lista">'
-                                        +'<tr class="primeira_linha">'
-                                        +'<td>C&oacute;digo</td>'
-                                        +'<td>Nome</td>'
-                                        +'<td>A&ccedil;&otilde;es</td>'
-                                        +'</tr>';
+                        
+
+                        var strHTML     = "<caption class='titulo'>Consulta por nome as divisoes</caption>"
+                        +"<thead>"
+                            +"<tr>"
+                                +"<th width='70px'>A&ccedil;&otilde;es</th>"
+                                +"<th width='60px'>C&oacute;digo</th>"
+                                +"<th>Nome</th>"
+                            +"</tr>"
+                        +"</thead>"
+                        +"<tbody>";
                                         
                         var codigo = "", nome = "", detalhes = "", alterar = "", excluir = "", acao = "";
                                         
@@ -84,42 +89,48 @@ class Divisao
                             codigo    = json.divisaos.data[i].codigo_divisao;
                             nome      = json.divisaos.data[i].nome;
 
-                            if (i % 2 == 0) {
-                                strHTML = strHTML + '<tr class="linha_par">';
-                            } else {
-                                strHTML = strHTML + '<tr class="linha_impar">';
-                            }
-
                             detalhes = "<a href=\"../consultas/detalhe.divisao.htm?codigo="
                             + codigo
-                            + "\">[D]</a>";
+                            + "\"><span class='glyphicon glyphicon-info-sign' aria-hidden='true'></span></a>";
 
-                            alterar = "<a href=\"../formularios/alterar.divisao.htm?codigo="
+                            alterar = "<span>  </span><a href=\"../formularios/alterar.divisao.htm?codigo="
                             + codigo
-                            + "\">[A]</a>";
+                            + "\"><span class='glyphicon glyphicon-edit' aria-hidden='true'></span></a>";
 
-                            excluir = "<a href=\"javascript:Divisao.confirmar("
+                            excluir = "<span>  </span><a href=\"javascript:Divisao.confirmar("
                             + codigo
-                            + ")\">[X]</a>";
+                            + ")\"><span class='glyphicon glyphicon-trash' aria-hidden='true'></span></a>";
 
                             acao = detalhes+alterar+excluir;
 
-                            strHTML = strHTML + "<td>"+codigo+"</td>"
-                            + "<td>"+nome+"</td>"   
-                            + "<td>"+acao+"</td>"   
+                            strHTML += "<tr>"
+                            +"<td>"+acao+"</td>"
+                            +"<td>"+codigo+"</td>"
+                            +"<td>"+nome+"</td>"
                             + "</tr>";
-                            temRegistro = true; 
+                            temRegistro = true;
                         }
 
                         console.log(json);
 
                         if(temRegistro  == false) {
                             strHTML = json.mensagem;
-                        }   
+                        } else {
+                            strHTML += "</tbody>"
+                            +"<tfoot>"
+                            +"<tr>"
+                                +"<th width='70px'>A&ccedil;&otilde;es</th>"
+                                +"<th width='60px'>C&oacute;digo</th>"
+                                +"<th>Nome</th>"
+                            +"</tr>"
+                            +"</tfoot>";
+                        }
 
-                        strHTML = strHTML + "</table>";
+
 
                         table.innerHTML = strHTML;
+                        
+                        table.style.display = "";
                     } else if (xhr.status == '422') {
                         var strErrosValidate = "";
 

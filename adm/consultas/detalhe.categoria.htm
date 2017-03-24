@@ -1,48 +1,64 @@
 <!DOCTYPE html> 
 <html lang="pt-br">
-	<head>
-            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-            <title>Cat&aacute;logo de Jogos</title>
-            <link rel="stylesheet" type="text/css" href="../../css/layoutadm.css" />
-            
-            <script type="text/javascript" src="../../javascript/scripts.min.js"></script>
-            
-            <script type="text/javascript">
-                document.addEventListener('DOMContentLoaded', function() {
-                    Util.logado();
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Cat&aacute;logo de Jogos</title>
+        <link rel="stylesheet" type="text/css" href="../../css/layoutadm.css" />
 
-                    Util.queryString();
-                    
-                    Categoria.detalhe(location.queryString.codigo);
-                });
-            </script>
-	</head>
+        <script type="text/javascript" src="../../javascript/scripts.min.js"></script>
+        
+        <script type="text/javascript">
+            document.addEventListener('DOMContentLoaded', function() {
+                Util.logado();
+                
+                Util.queryString();
+
+                Categoria.detalhe(location.queryString.codigo);
+            });
+        </script>
+
+        <link rel="stylesheet" href="../../css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u">
+
+        <link rel="stylesheet" href="../../css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp">
+
+        <script src="../../javascript/jquery.min.js"></script>
+
+        <script src="../../javascript/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"></script>
+
+        <noscript>Seu navegador não suporta JavaScript ou mesmo foi desabilitado!</noscript>    
+    </head>
 	
 	<body>
-		<div id="geral">
-			<div id="cabecalho">
-			</div>
-			
-            <header>
-                <nav id="menu_superior">
-                    <a href="../paginas/home.htm">Home</a> ::
-                    <a href="../paginas/cadastros.htm">Cadastros</a> ::
-                    <a href="../paginas/administrar.htm">Administrar</a> ::
-                    <a href="../paginas/consultas.htm">Consultas</a> ::
-                    <a href="../formularios/logout.htm">Sair</a>
-                </nav>
-            </header>
-			
-			<div id="conteudo" class="form">
+		<header>
+            <div id="headerimg"></div>
 
-				<h2 class="titulo">Detalhe de categoria</h2>
-                                <label for="codigo">Codigo:</label> <input type="text" readonly id="codigo" class="readonly" />
-                                <br />
-                                <label for="txtNome">Nome:</label> <input type="text" readonly id="txtNome" class="readonly" />
-			</div>
-			
-			<footer id="rodape">
-            </footer>       	
-		</div>
+            <nav class="navbar navbar-default">
+                <a class="navbar-brand" href="../paginas/home.htm">Home</a>
+                <a class="navbar-brand" href="../paginas/cadastros.htm">Cadastros</a>
+                <a class="navbar-brand" href="../paginas/administrar.htm">Administrar</a>
+                <a class="navbar-brand" href="../paginas/consultas.htm">Consultas</a>
+                <a class="navbar-brand" href="../formularios/logout.htm">Sair</a>
+            </nav>
+        </header>
+
+        <div class="container">
+            <div class="col-sm-6 pull-left"> 
+    				<h2 class="titulo">Detalhes da categoria</h2>
+                    <div class="form-group">
+                        <label for="codigo">Codigo</label> 
+                        <input type="text" readonly id="codigo" class="form-control readonly" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="txtNome">Nome</label> 
+                        <input type="text" readonly id="txtNome" class="form-control readonly" />
+                    </div>
+    		</div>
+        </div>
+
+        <footer></footer>   
 	</body>
 </html>

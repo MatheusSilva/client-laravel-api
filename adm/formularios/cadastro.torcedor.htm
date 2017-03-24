@@ -1,78 +1,76 @@
 <!DOCTYPE html> 
 <html lang="pt-br">
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>Cat&aacute;logo de Times</title>
-		<link rel="stylesheet" type="text/css" href="../../css/layoutadm.css" />
-		<script type="text/javascript" src="../../javascript/scripts.min.js"> </script>
-	</head>
-	
-	<body>
-		<div id="geral">
-			<div id="cabecalho">
-			</div>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Cat&aacute;logo de Jogos</title>
+        <link rel="stylesheet" type="text/css" href="../../css/layoutadm.css" />
+
+        <script type="text/javascript" src="../../javascript/scripts.min.js"></script>
+
+        <link rel="stylesheet" href="../../css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u">
+
+        <link rel="stylesheet" href="../../css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp">
+
+        <script src="../../javascript/jquery.min.js"></script>
+
+        <script src="../../javascript/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"></script>
+
+        <noscript>Seu navegador não suporta JavaScript ou mesmo foi desabilitado!</noscript>
+    </head>
+    
+    <body>
+        <header>
+        	<div id="headerimg"></div>
+            <nav class="navbar navbar-default">
+            	<a class="navbar-brand" href="../../site/paginas/home.htm">Home</a>
+                <a class="navbar-brand" href="../../adm/formularios/cadastro.torcedor.htm">Cadastrar-se</a>
+                <a class="navbar-brand" href="../../site/consultas/lista.time.htm">Consultas</a>
+                <a class="navbar-brand" href="../../adm/paginas/home.htm">Entrar</a>
+            </nav>
+        </header> 
 			
-			<header>
-                <nav id="menu_superior">
-                    <a href="../../site/paginas/home.htm">Home</a> ::
-		            <a href="../formularios/cadastro.torcedor.htm">Cadastrar-se</a> ::
-		            <a href="../../site/consultas/lista.time.htm">Consultas</a> ::            
-		            <a href="../../adm/paginas/home.htm">Entrar</a>
-                </nav>
-            </header>
-			
-			<div id="conteudo" class="form">
-				<h2 class="titulo">Cadastro de Torcedores</h2>
+			<div class="container">	
+				<div class="col-sm-6 pull-left">
+					<h2 class="titulo">Cadastro de Torcedores</h2>
+						
+					<form class="form" id="frmCadastro" name="frmCadastro" class="form-horizontal">
+						<div class="form-group">
+							<label for="txtNome">Nome</label>
+							<input type="text" class="form-control" name="txtNome" id="txtNome">
+                    	</div>
+
+                    	<div class="form-group">
+							<label for="txtEmail">E-mail</label>
+							<input type="text" class="form-control" name="txtEmail" id="txtEmail">
+                    	</div>
+
+                    	<div class="form-group">
+							<label for="txtSenha">Senha</label>
+							<input type="password" class="form-control" name="txtSenha" id="txtSenha">
+                    	</div>
+
+                    	<div class="form-group">
+							<label for="txtConfSenha">Confirma Senha</label>
+							<input type="password" class="form-control" name="txtConfSenha" id="txtConfSenha">
+                    	</div>
+
+                    	<div class="form-group">
+                        	<input type="hidden" name="acao" value="1" />
+                      		<button id="btnCadastrar" type="button" class="btn btn-default" onclick="Torcedor.cadastrar(frmCadastro)">Cadastrar</button>
+                      		<button name="btnLimpar" id="btnLimpar" type="reset" class="btn btn-default">Limpar</button>
+                    	</div>
+
+                    	
+					</form>
 					
-				<form class="form" id="frmCadastro" name="frmCadastro">
-					<table>
-						<tr>
-							<td>Nome:</td>
-							<td>
-								<input type="text" name="txtNome" id="txtNome" />
-							</td>
-						</tr>
-
-						<tr>
-							<td>E-mail:</td>
-							<td>
-								<input type="text" name="txtEmail" id="txtEmail" />
-							</td>
-						</tr>
-						
-						<tr>
-							<td>Senha:</td>
-							<td>
-								<input type="password" name="txtSenha" id="txtSenha" />
-							</td>
-						</tr>
-						
-						<tr>
-							<td> Confirma Senha:</td>
-							<td>
-								<input type="password" name="txtConfSenha" id="txtConfSenha"/>
-							</td>
-						</tr>
-						
-						<tr>
-							<td colspan="2">
-								<input type="hidden" name="acao" value="1" />
-
-								<input id="btnCadastrar" type="button" value="Cadastrar" onclick="Torcedor.cadastrar(frmCadastro)" />
-									
-								<input type="reset" name="btnLimpar"
-									value="Limpar" id="btnLimpar" />
-							</td>
-						</tr>
-					</table>
-				</form>
-				
-				<div id="mensagem"></div>
-				
+					<div id="mensagem"></div>
+					
+				</div>
 			</div>
 			
-			<footer id="rodape">
-            </footer>       	
-		</div>
-	</body>
+        <footer></footer>
+    </body>
 </html>

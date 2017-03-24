@@ -1,6 +1,8 @@
 body {
 	background-color:#000000;
 	color:#FFFFFF;
+	width:auto;
+	margin:auto;
 }
 
 div {
@@ -11,59 +13,38 @@ div {
     background-color:#C0C0C0;
 }
 
-#geral {
-	width:auto;
-	margin:auto;
-}
-
-#cabecalho {
+#headerimg {
 	height:132px;
+	width:100%;
 	background-image:url(../img/header.jpg);
 }
 
-#menu_superior {
-	background-color:#33CCFF;
-	height:25px;
-	color:#FFFFFF;
-}
-
-#menu_superior a {
-	text-decoration:none;
-	color:#FFFFFF;
-	font-weight:bold;
-}
-
-#menu_superior a:hover {
-	text-decoration:underline;
-	color:#FFFF00;
-}
-
 #conteudo {
-	height:260px;
-	background-color:#000000;
-	color:#FFFFFF;
+    overflow:auto;
+	background-color:#FFFFFF;
+	color:#000000;
 	text-align:justify;
-	overflow:auto;
 }
 
-#rodape::before {
-	position: absolute;   /* posição absoluta */
+#conteudo a {
+	color:#000000;
+	text-decoration:none;
+}
+
+#conteudo a:hover {
+	text-decoration:underline;
+}
+
+footer::before {
+    position: absolute;   /* posição absoluta */
 	bottom: 0;   /* Fixa a div no fim da página */
 	width: 100%;   /* Largura estende por toda página da div */
 	height: 200px;   /* Altura da div */
 	height:15px;
-	font-size:12px;
+	font-size:14px;
 	text-align:center;
-	background-color:#3399FF;
-	color:#FFFFFF;
+	color:#3399FF;
 	content: "Sistema Desenvolvido por Matheus Silva";
-}
-
-#menu_lateralold {
-	float:left;
-	height:260px;
-	background-color:#3399FF;
-	width:150px;
 }
 
 #texto {
@@ -75,10 +56,30 @@ div {
 	text-align:center;
 }
 
-#tabela {
-	position: absolute;
-	width: 100%;
-	left: 10%;
+.table {
+	overflow:hidden;
+	margin-left: auto ;  
+	margin-right: auto ;
+	color:#000000;
+	table-layout: fixed;
+	word-wrap: break-word;
+	margin: 20px;
+}
+
+.dataTables_info{
+	margin-left: 40px;
+}
+
+.table th {
+   text-align: center;   
+}
+
+.table td {
+   text-align: left;   
+}
+
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+  background-color: #00FF00;
 }
 
 #capa {
@@ -116,4 +117,8 @@ div {
 #form, .form {
 	display: table;
 	margin: 0 auto;
+}
+
+caption { 
+    text-align: center;
 }

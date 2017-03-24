@@ -19,32 +19,15 @@ div {
 	background-image:url(../img/header.jpg);
 }
 
-header nav {
-	background-color:#3399FF;
-	height:25px;
-	color:#FFFFFF;
-}
-
-header nav a {
-	text-decoration:none;
-	color:#FFFFFF;
-	font-weight:bold;
-}
-
-header nav a:hover {
-	text-decoration:underline;
-	color:#FFFF00;
-}
-
 #conteudo {
     overflow:auto;
-	background-color:#000000;
-	color:#FFFFFF;
+	background-color:#FFFFFF;
+	color:#000000;
 	text-align:justify;
 }
 
 #conteudo a {
-	color:#FFFFFF;
+	color:#000000;
 	text-decoration:none;
 }
 
@@ -117,4 +100,8 @@ tr th {
 #form, .form {
 	display: table;
 	margin: 0 auto;
+}
+
+caption { 
+    text-align: center;
 }
