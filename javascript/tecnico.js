@@ -4,38 +4,41 @@ class Tecnico
     {
         var strErro = '';
 
+        var txtDataNascimento = document.getElementById("txtDataNascimento").value;
+        txtDataNascimento = txtDataNascimento.split("/");
+
         if (document.getElementById("txtNome").value == "") {
             strErro = strErro + "\nVocê não preencheu o nome.";
         }
         
-        if (document.getElementById("cmbDia").value == "Dia") {
+        if (txtDataNascimento[0] == "Dia") {
             strErro = strErro + "\nVocê não preencheu o dia.";
         }
         
-        if (document.getElementById("cmbMes").value == "Mes") {
+        if (txtDataNascimento[1] == "Mes") {
             strErro = strErro + "\nVocê não preencheu o mes.";
         }
         
-        if (document.getElementById("cmbAno").value == "Ano") {
+        if (txtDataNascimento[2] == "Ano") {
             strErro = strErro + "\nVocê não preencheu o ano.";
         }
         
-        if (document.getElementById("cmbDia").value == "31") {
-            if (document.getElementById("cmbMes").value == "04" 
-            || document.getElementById("cmbMes").value  == "06" 
-            || document.getElementById("cmbMes").value  == "09" 
-            || document.getElementById("cmbMes").value  == "11") {
-                strErro = strErro + "\no mês que você escolheu não possui mais de 30 dias.";
-            }
+        if (txtDataNascimento[0] == "31" && (
+            txtDataNascimento[1] == "04" 
+            || txtDataNascimento[1]  == "06" 
+            || txtDataNascimento[1]  == "09" 
+            || txtDataNascimento[1]  == "11")
+        ) {
+            strErro = strErro + "\no mês que você escolheu não possui mais de 30 dias.";
         }
          
-        if ((document.getElementById("cmbDia").value == "29") && (document.getElementById("cmbMes").value == "02")) {
-            if ((document.getElementById("cmbAno").value%4 != "0") || (document.getElementById("cmbAno").value%100 != "0") || (document.getElementById("cmbAno").value%400 != "0")) {
-                strErro = strErro + "\nEste ano não é bissexto.";
-            }
+        if ((txtDataNascimento[0] == "29") && (txtDataNascimento[1] == "02") && (
+        (txtDataNascimento[2]%4 != "0") || (txtDataNascimento[2]%100 != "0") || (txtDataNascimento[2]%400 != "0")
+        )) {
+            strErro = strErro + "\nEste ano não é bissexto.";
         }
         
-        if (document.getElementById("cmbDia").value > 29 && document.getElementById("cmbMes").value == "02") {
+        if (txtDataNascimento[0] > 29 && txtDataNascimento[1] == "02") {
             strErro = strErro + "\nfevereiro não tem mais que 29 dias.";
         }
 
@@ -72,7 +75,7 @@ class Tecnico
         "data": null, 
         render: function ( data, type, row ) {
 
-            codigo = data.codigo_categoria;
+            codigo = data.codigo_tecnico;
 
             // Combine the first and last names into a single table field
             detalhes = "<a href=\"../consultas/detalhe.tecnico.htm?codigo="
@@ -139,9 +142,7 @@ class Tecnico
     {
         var codigo  = '';
         var txtNome = '';
-        var cmbDia  = '';
-        var cmbMes  = '';
-        var cmbAno  = '';
+        var dataNascimento  = '';
 
         if (form.codigo != undefined) {
             codigo = form.codigo.value;
@@ -151,22 +152,16 @@ class Tecnico
             txtNome = form.txtNome.value;
         }
 
-        if (form.cmbDia != undefined) {
-            cmbDia = form.cmbDia.options[form.cmbDia.selectedIndex].value;
-        }
-
-        if (form.cmbMes != undefined) {
-            cmbMes = form.cmbMes.options[form.cmbMes.selectedIndex].value;
-        }
-
-        if (form.cmbAno != undefined) {
-            cmbAno = form.cmbAno.options[form.cmbAno.selectedIndex].value;
+        if (form.txtDataNascimento != undefined) {
+            dataNascimento = form.txtDataNascimento.value;
+            dataNascimento = dataNascimento.split("/");
+            dataNascimento = dataNascimento[2]+'-'+dataNascimento[1]+'-'+dataNascimento[0];
         }
 
         return JSON.stringify({
             "codigo_tecnico": codigo,
             "nome": txtNome,
-            "data_nascimento": cmbAno+'-'+cmbMes+'-'+cmbDia
+            "data_nascimento": dataNascimento
         });
     }
 

@@ -41,7 +41,7 @@ class Divisao
         "data": null, 
         render: function ( data, type, row ) {
 
-            codigo = data.codigo_categoria;
+            codigo = data.codigo_divisao;
 
             // Combine the first and last names into a single table field
             detalhes = "<a href=\"../consultas/detalhe.divisao.htm?codigo="
