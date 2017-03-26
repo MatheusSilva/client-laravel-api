@@ -131,5 +131,4 @@ class Util
             window.location = "http://localhost/client-laravel-api/site/paginas/home.htm";
         }
     }
-
 }

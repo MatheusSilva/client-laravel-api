@@ -30,62 +30,10 @@
 		<script src="../../javascript/dataTables.select.min.js"></script>
 
 		<script type="text/javascript">
-
-		    $(document).ready(function(){
-		    	var jwtoken = '';
-        		jwtoken = Util.getCookie('token');
-
-		         var table = $('#tabela01').dataTable( {
-		          processing: true,
-		          serverSide: true,
-		      	  dom: "Bfrtip",		
-		          ajax : {
-		             "url": 'http://localhost/laravel-api/public/api/v1/tecnicos',
-		             "dataType": 'json',
-		             "type": "GET",
-		             "beforeSend": function(xhr){
-		                xhr.setRequestHeader('Authorization', 'Bearer ' + jwtoken);
-		             }
-		          },
-		          columns: [
-		            {
-		            "class": "details-control",
-		            "orderable": false,
-		            "searchable": false,
-		            "searchable": false,
-		            "data": null, render: function ( data, type, row ) {
-                		// Combine the first and last names into a single table field
-                		detalhes = "<a href=\"../consultas/detalhe.tecnico.htm?codigo="
-                            + data.codigo_tecnico
-                            + "\"><span class='glyphicon glyphicon-info-sign' aria-hidden='true'></span></a>";
-
-                            alterar = "<span>  </span><a href=\"../formularios/alterar.tecnico.htm?codigo="
-                            + data.codigo_tecnico
-                            + "\"><span class='glyphicon glyphicon-edit' aria-hidden='true'></span></a>";
-
-                            excluir = "<span>  </span><a href=\"javascript:Tecnico.confirmar("
-                            + data.codigo_tecnico
-                            + ")\"><span class='glyphicon glyphicon-trash' aria-hidden='true'></span></a>";
-
-                            //console.log(row);
-                            return detalhes+alterar+excluir;
-            		}, 
-		            "defaultContent": "",
-		            },
-
-		            { "data": "codigo_tecnico" , name: 'codigo_tecnico', "width": "60px" },
-		            { "data": "nome" },
-		          ],
-		          select: true,
-		          
-		          'language': {
-                    'url': '../../javascript/Portuguese-Brasil.json'
-                  }
-		          
-		       });
-
-		    });     
-		    
+		    document.addEventListener('DOMContentLoaded', function() {
+		    	Util.logado();
+				Tecnico.listar();     
+		    });
 		</script>
 
 		<noscript>Seu navegador não suporta JavaScript ou mesmo foi desabilitado!</noscript>

@@ -18,6 +18,69 @@ class Categoria
         });
     }
 
+    static listar()
+    {
+        var jwtoken,codigo,detalhes,alterar,excluir;
+
+        jwtoken = Util.getCookie('token');
+
+        var table = jQuery('#tabela01').dataTable( {
+        processing: true,
+        serverSide: true,
+        dom: "Bfrtip",        
+        ajax : {
+         "url": 'http://localhost/laravel-api/public/api/v1/categorias',
+         "dataType": 'json',
+         "type": "GET",
+         "beforeSend": function(xhr){
+            xhr.setRequestHeader('Authorization', 'Bearer ' + jwtoken);
+         }
+        },
+        columns: [
+        {
+        "class": "details-control",
+        "orderable": false,
+        "searchable": false,
+        "searchable": false,
+        "data": null, 
+        render: function ( data, type, row ) {
+
+            codigo = data.codigo_categoria;
+
+            // Combine the first and last names into a single table field
+            detalhes = "<a href=\"../consultas/detalhe.categoria.htm?codigo="
+            + codigo
+            + "\"><span class='glyphicon glyphicon-info-sign' aria-hidden='true'></span></a>";
+
+            alterar = "<span>  </span><a href=\"../formularios/alterar.categoria.htm?codigo="
+            + codigo
+            + "\"><span class='glyphicon glyphicon-edit' aria-hidden='true'></span></a>";
+
+            
+
+            excluir = "<span>  </span><a href=\"javascript:Categoria.confirmar("
+            + codigo
+            + ")\"><span class='glyphicon glyphicon-trash' aria-hidden='true'></span></a>";
+
+            //console.log(row);
+            return detalhes+alterar+excluir;
+        }, 
+        "defaultContent": "",
+        },
+
+        { "data": "codigo_categoria" , name: "codigo_categoria", "width": "60px" },
+        { "data": "nome" },
+
+        ],
+        select: true,
+        'language': {
+        'url': '../../javascript/Portuguese-Brasil.json'
+        }
+
+        });
+    }
+
+
     static detalhe(codigo)
     {
         var xhr = Util.createXHR();
@@ -39,137 +102,6 @@ class Categoria
 
         xhr.setRequestHeader('Authorization', 'Bearer ' + jwtoken);
         xhr.send();
-    }
-
-    static consultar(form)
-    {
-        var url = "http://localhost/laravel-api/public/api/v1/categorias";
-        //var url = "http://127.0.0.1:8084/restful/cliente/listarTodos";
-
-        if (form != null && form.txtNome.value != undefined && form.txtNome.value != '') {
-            url += "/search?key-search="+form.txtNome.value;
-        }
-
-        var xhr = Util.createXHR();
-
-        if(xhr != undefined){
-            //Montar requisição
-            xhr.open("GET", url, true);
-            //xhr.setRequestHeader("Content-Type","application/json");
-            
-            xhr.onload = function(e) {
-                // Pega a tabela.
-                var table = document.getElementById("tabela");
-                
-                //Verificar pelo estado "4" de pronto.
-                if (xhr.readyState == '4') {
-                    //Pegar dados da resposta json
-                    var json = JSON.parse(xhr.responseText);
-                    
-                    if (xhr.status == '200') {    
-                        // Limpa toda a INNER da tabela.
-                        table.innerHTML = "";
-                        
-                        var len = 0;
-
-                        if (json.categorias != null) {
-                            len         = json.categorias.data.length;
-                        }
-
-                        var temRegistro = false;
-                        
-                        var strHTML     = '<table width="80%" class="lista">'
-                                        +'<tr class="primeira_linha">'
-                                        +'<td>C&oacute;digo</td>'
-                                        +'<td>Nome</td>'
-                                        +'<td>A&ccedil;&otilde;es</td>'
-                                        +'</tr>';
-
-                        var codigo = "", nome = "", detalhes = "", alterar = "", excluir = "", acao = "";
-
-                        for (var i=0; i < len; i++) {
-                            codigo    = json.categorias.data[i].codigo_categoria;
-                            nome      = json.categorias.data[i].nome;
-
-                            if (i % 2 == 0) {
-                                strHTML = strHTML + '<tr class="linha_par">';
-                            } else {
-                                strHTML = strHTML + '<tr class="linha_impar">';
-                            }
-
-                            detalhes = "<a href=\"../consultas/detalhe.categoria.htm?codigo="
-                            + codigo
-                            + "\">[D]</a>";
-
-                            alterar = "<a href=\"../formularios/alterar.categoria.htm?codigo="
-                            + codigo
-                            + "\">[A]</a>";
-
-                            excluir = "<a href=\"javascript:Categoria.confirmar("
-                            + codigo
-                            + ")\">[X]</a>";
-
-                            acao = detalhes+alterar+excluir;
-
-                            strHTML = strHTML + "<td>"+codigo+"</td>"
-                            + "<td>"+nome+"</td>"   
-                            + "<td>"+acao+"</td>"   
-                            + "</tr>";
-                            temRegistro = true; 
-                        }
-
-                        if(temRegistro  == false) {
-                            strHTML = json.mensagem;
-                        }   
-
-                        strHTML = strHTML + "</table>";
-
-                        table.innerHTML = strHTML;
-                    } else if (xhr.status == '422') {
-                        var strErrosValidate = "";
-
-                        if (json.validate_error !== undefined && json.json.validate_error.key-search !== undefined) {
-                            strErrosValidate += json.validate_error.key-search[0];
-                        }
-
-                        if (strErrosValidate !== '') {
-                            table.innerHTML = "<br /><b>"+strErrosValidate+"</b>";    
-                        } else {
-                            table.innerHTML = "<br /><b>Algum erro desconhecido ocorreu.</b>";
-                        }
-                    } else if (xhr.status == '500') {                 
-                        if (json.error !== undefined && json.error === 'token_invalid') {
-                            table.innerHTML = "<br /><b>Token inválido. Faça o login novamente.</b>";
-                        } else {
-                            table.innerHTML = "<br /><b>Algum erro desconhecido ocorreu.</b>";
-                        }
-                    } else if (xhr.status == '401') {
-                        if (json.error !== undefined && json.error === 'token_expired') {
-                            table.innerHTML = "<br /><b>Token expirado. Faça o login novamente.</b>";
-                        } else {
-                            table.innerHTML = "<br /><b>Algum erro desconhecido ocorreu.</b>";
-                        }
-                    } else if (xhr.status == '400') {
-                        if (json.error !== undefined && json.error === 'token_not_provided') {
-                            table.innerHTML = "<br /><b>Token expirado. Faça o login novamente.</b>";
-                        } else {
-                            table.innerHTML = "<br /><b>Algum erro desconhecido ocorreu.</b>";
-                        }
-                    } else {
-                        table.innerHTML = "<br /><b>Algum erro desconhecido ocorreu.</b>";
-                    }
-
-                }
-            }
-
-            //Enviar
-
-            var jwtoken = '';
-            jwtoken = Util.getCookie('token');
-
-            xhr.setRequestHeader('Authorization', 'Bearer ' + jwtoken);
-            xhr.send();
-        }
     }
 
     static callbackCadAltDel(xhr, op)
@@ -231,7 +163,7 @@ class Categoria
     static confirmar(codigo)
     {
         var xhr = Util.createXHR();
-        var ok = window.confirm("Voce tem certeza que deseja excluir?");
+        var ok = window.confirm("Você tem certeza que deseja excluir esta categoria?");
 
         if (ok) {
             document.getElementById("ajax-loader").style.display='block';	
