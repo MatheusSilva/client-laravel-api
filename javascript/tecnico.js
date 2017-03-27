@@ -1,5 +1,5 @@
 class Tecnico
-{
+{   
     static valida()
     {
         var strErro = '';

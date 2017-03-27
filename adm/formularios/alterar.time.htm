@@ -1,11 +1,18 @@
 <!DOCTYPE html> 
 <html lang="pt-br">
     <head>
+        <meta charset="utf-8">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Cat&aacute;logo de Jogos</title>
         <link rel="stylesheet" type="text/css" href="../../css/layoutadm.css" />
-        
+        <link rel="stylesheet" href="../../css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u">
+        <link rel="stylesheet" href="../../css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp">
+
         <script type="text/javascript" src="../../javascript/scripts.min.js"></script>
+        <script src="../../javascript/jquery.min.js"></script>
+        <script src="../../javascript/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"></script>
 
         <script type="text/javascript">
             document.addEventListener('DOMContentLoaded', function() {
@@ -14,87 +21,87 @@
                 Util.queryString();
 
                 var codigo = location.queryString.codigo;
-                Time.carregaDivisao(codigo);
-                Time.carregaCategoria(codigo);
-                Time.carregaTecnico(codigo);
-                Time.listaNomePorCodigo(codigo);
-                document.getElementById("codigo").value = codigo;
+                
+                Util.prototype.ajaxcount = 0;
+
+                Time.carregaDivisao();
+                Time.carregaCategoria();
+                Time.carregaTecnico();
+
+                function ajaxdone()
+                {
+                    if (Util.prototype.ajaxcount < 3) {
+                      //console.log(Util.prototype.ajaxcount);  
+                      setTimeout(ajaxdone,21);
+                    } else {
+                        Time.detalhe(codigo, true);
+                    }
+                }
+
+                ajaxdone();
+                
             });
         </script>
+
+
+        <noscript>Seu navegador não suporta JavaScript ou mesmo foi desabilitado!</noscript>    
     </head>
 
     <body>
-        <div id="geral">
-            <div id="cabecalho">
-            </div>
+        <header>
+            <div id="headerimg"></div>
 
-            <header>
-                <nav id="menu_superior">
-                    <a href="../paginas/home.htm">Home</a> ::
-                    <a href="../paginas/cadastros.htm">Cadastros</a> ::
-                    <a href="../paginas/administrar.htm">Administrar</a> ::
-                    <a href="../paginas/consultas.htm">Consultas</a> ::
-                    <a href="logout.htm">Sair</a>
-                </nav>
-            </header>
+            <nav class="navbar navbar-default">
+                <a class="navbar-brand" href="../paginas/home.htm">Home</a>
+                <a class="navbar-brand" href="../paginas/cadastros.htm">Cadastros</a>
+                <a class="navbar-brand" href="../paginas/administrar.htm">Administrar</a>
+                <a class="navbar-brand" href="../paginas/consultas.htm">Consultas</a>
+                <a class="navbar-brand" href="../formularios/logout.htm">Sair</a>
+            </nav>
+        </header>
 
-            <div id="conteudo">
-                <h2 class="titulo">Alterar Dados de Time</h2>
+        <div class="container">
+            <div class="col-sm-6 pull-left"> 
+                <h2 class="titulo">Alterar dados da time</h2>
 
-                <form id="frmTime" name="frmTime" class="form">
-                    <table>
-                        <tr>
-                            <td>Nome:</td>
-                            <td>
-                                <input type="text" id="txtNome" name="txtNome" />
-                            </td>
-                        </tr>
-						
-					    <tr>
-                        	<td>Capa: </td>
-                        	<td>
-                           		<input type="file" name="txtFoto" id="txtFoto" />
-                        	</td>
-                        </tr>
-                            
-                        <tr>
-                        	<td>Divis&atilde;o: </td>
-                            <td>
-                            	<select name="cmbDivisao" id="cmbDivisao">
-                                </select>
-                            </td>
-                        </tr>
+                <form id="frmTime" name="frmTime" class="form-horizontal">
+                    <div class="form-group">
+                      <label for="txtNome">Nome</label>
+                      <input type="text" class="form-control" name="txtNome" id="txtNome" />
+                    </div>
 
-                        <tr>
-                            <td>Categoria: </td>
-                            <td>
-                                <select name="cmbCategoria" id="cmbCategoria">
-                                </select>
-                            </td>
-                        </tr>
+                    <div class="form-group">
+                      <label for="txtFoto">Capa</label>
+                      <input type="file" class="form-control" name="txtFoto" id="txtFoto" />
+                    </div>
 
-                        <tr>
-                            <td>Tecnico: </td>
-                            <td>
-                                <select name="cmbTecnico" id="cmbTecnico">
-                                </select>
-                            </td>                             
-                        </tr>
+                    <div class="form-group">
+                      <label for="txtFoto">Divis&atilde;o:</label>
+                      <select class="form-control" name="cmbDivisao" id="cmbDivisao" ></select>
+                    </div>
 
-                        <tr>
-                            <td colspan="2">
-                                <input type="hidden" name="acao" value="2" />
-                                <input type="submit" name="btnAlterar" value="Alterar" id="btnAlterar" onclick="Time.atualizar(frmTime)" />
-                                <input type="reset" name="btnLimpar" value="Limpar" id="btnLimpar" />
-                            </td>
-                        </tr>
-                    </table>
-                    <input type="hidden" id="codigo" name="codigo" />
+                    <div class="form-group">
+                      <label for="txtFoto">Categoria</label>
+                      <select class="form-control" name="cmbCategoria" id="cmbCategoria" ></select>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="txtFoto">Tecnico</label>
+                      <select class="form-control" name="cmbTecnico" id="cmbTecnico" ></select>
+                    </div>
+
+                    <div class="form-group">
+                      <input type="hidden" name="codigo" id="codigo" value="" />
+                      <button id="btnAtualizar" name="btnAtualizar" type="button" class="btn btn-default" onclick="Time.atualizar(frmTime)">Alterar</button>
+                      <button id="btnLimpar" name="btnLimpar" type="reset" class="btn btn-default">Limpar</button>
+                    </div>
                 </form>
-            </div>
 
-            <footer id="rodape">
-            </footer>       	
+                <div id="mensagem" name="mensagem"></div>
+            </div>
         </div>
+
+        <footer></footer>
     </body>
 </html>
+   

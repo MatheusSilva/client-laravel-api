@@ -1,45 +1,65 @@
 ﻿<!DOCTYPE html> 
 <html lang="pt-br">
 	<head>
+		<meta charset="utf-8">
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>Cat&aacute;logo de Jogos</title>
-		<link rel="stylesheet" type="text/css" href="../../css/layoutadm.css" />
-        <script type="text/javascript" src="../../javascript/scripts.min.js"></script>
-        <script type="text/javascript">
-			Util.logado();
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Cat&aacute;logo de Jogos</title>
+        <link rel="stylesheet" type="text/css" href="../../css/layoutadm.css" />
+		<link rel="stylesheet" href="../../css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u">
+		<link rel="stylesheet" href="../../css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp">
+		<link rel="stylesheet" type="text/css" href="../../css/jquery.dataTables.min.css"/>
+
+		<script type="text/javascript" src="../../javascript/scripts.min.js"></script>
+		<script src="../../javascript/jquery.min.js"></script>
+		<script src="../../javascript/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"></script>
+		<script type="text/javascript" src="../../javascript/jquery.dataTables.min.js"></script>
+		<script src="../../javascript/dataTables.select.min.js"></script>
+
+		<script type="text/javascript">
+		    document.addEventListener('DOMContentLoaded', function() {
+		    	Util.logado();
+				Time.listar();     
+		    });
 		</script>
+
+		<noscript>Seu navegador não suporta JavaScript ou mesmo foi desabilitado!</noscript>
 	</head>
 	
 	<body>
-		<div id="geral">
-			<div id="cabecalho">
-			</div>
+		<header>
+			<div id="headerimg"></div>
+
+	        <nav class="navbar navbar-default">
+	            <a class="navbar-brand" href="../paginas/home.htm">Home</a>
+				<a class="navbar-brand" href="../paginas/cadastros.htm">Cadastros</a>
+				<a class="navbar-brand" href="../paginas/administrar.htm">Administrar</a>
+				<a class="navbar-brand" href="../paginas/consultas.htm">Consultas</a>
+				<a class="navbar-brand" href="../formularios/logout.htm">Sair</a>
+	        </nav>
+		</header>
 			
-			<header>
-                <nav id="menu_superior">
-                    <a href="../paginas/home.htm">Home</a> ::
-					<a href="../paginas/cadastros.htm">Cadastros</a> ::
-					<a href="../paginas/administrar.htm">Administrar</a> ::
-					<a href="../paginas/consultas.htm">Consultas</a> ::
-					<a href="../formularios/logout.htm">Sair</a>
-                </nav>
-            </header>
-			
-			<div id="conteudo">
-				<h2 class="titulo">Consulta por nome os times</h2>
-				
-                <form class="form" id="frmTime" name="frmTime">
-					Nome: <input type="text" name="txtNome" id="txtNome" />
-					<input type="button" id="btnConsultar" name="btnConsultar" value="Consultar" onclick="Time.consultar(frmTime)" />
-				</form>                             
-	
-				<div id="tabela" name="tabela">
-				</div>
-					
-			</div>
-			
-			<footer id="rodape">
-            </footer>       	
+		<div name="conteudo" class="container-fluid">
+			<table id="tabela01" class="display table table-striped table-condensed table-bordered table-hover" cellspacing="0" width="50%">
+				<caption class="titulo">Consulta por nome os times</caption>
+		        <thead>
+		            <tr>
+		            	<th style="width:60px;" class="">A&ccedil;&otilde;es</th>
+		                <th>C&oacute;digo</th>
+		                <th>Nome</th>
+		            </tr>
+		        </thead>
+		        <tfoot>
+		            <tr>
+		            	<th style="width:60px;" class="">A&ccedil;&otilde;es</th>
+		                <th>C&oacute;digo</th>
+		                <th>Nome</th>
+		            </tr>
+		        </tfoot>
+			</table>	
 		</div>
+			
+		<footer></footer>       	
 	</body>
 </html>

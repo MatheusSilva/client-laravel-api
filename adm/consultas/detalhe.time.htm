@@ -1,85 +1,68 @@
 <!DOCTYPE html> 
 <html lang="pt-br">
-	<head>
-            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-            <title>Cat&aacute;logo de Jogos</title>
-            <link rel="stylesheet" type="text/css" href="../../css/layoutadm.css" />
-            <script type="text/javascript" src="../../javascript/scripts.min.js"></script>
-            
-            <script type="text/javascript">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Cat&aacute;logo de Jogos</title>
+        <link rel="stylesheet" type="text/css" href="../../css/layoutadm.css" />
+
+        <script type="text/javascript" src="../../javascript/scripts.min.js"></script>
+        
+        <script type="text/javascript">
             document.addEventListener('DOMContentLoaded', function() {
                 Util.logado();
-
+                
                 Util.queryString();
 
-                var xhr = Util.createXHR();
-                var token  = Util.getCookie('token');
-                var consulta = "";
+                var codigo = location.queryString.codigo;
 
-                if (token !== "") {
-                    consulta = "&tk="+token;
-                }
+                Time.detalhe(codigo);
+            });
+        </script>
 
-                if(xhr != undefined) {
-                    //Montar requisição
-                    xhr.open("GET","http://localhost/sistemaRest/api/v1/controller/time.php?a=1&id="+location.queryString.codigo+consulta,true);
-                    xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-                    xhr.onreadystatechange = function() {
-                        //Verificar pelo estado "4" de pronto.
-                        if (xhr.readyState == '4') {
-                            //Pegar dados da resposta json
-                            var json = JSON.parse(xhr.responseText);
-                            document.getElementById("codigo").value = json.codigotime;
-                            document.getElementById("txtNomeTime").value = json.nomeTime;
-                            document.getElementById("txtNomeDivisao").value = json.nomeDivisao;
-                            document.getElementById("txtNomeTecnico").value = json.nomeTecnico;
-                            document.getElementById("txtNomeCategoria").value = json.nomeCategoria;
-                            document.getElementById("txtDesempenhoTime").value = json.nomeDesempenhoTime;
-                            document.getElementById("txtComprarNovoJogador").value = json.NomeComprarNovoJogador;
-                        }
-                    }
+        <link rel="stylesheet" href="../../css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u">
 
-                    xhr.send();
-                }
-            });  
-            </script>
-	</head>
-	
-	<body>
-		<div id="geral">
-			<div id="cabecalho">
-			</div>
-			
-      <header>
-          <nav id="menu_superior">
-              <a href="../paginas/home.htm">Home</a> ::
-              <a href="../paginas/cadastros.htm">Cadastros</a> ::
-              <a href="../paginas/administrar.htm">Administrar</a> ::
-              <a href="../paginas/consultas.htm">Consultas</a> ::
-              <a href="../formularios/logout.htm">Sair</a>
-          </nav>
-      </header>
-			
-      <div id="conteudo" class="form">
-          <h2 class="titulo">Detalhe de Time</h2>
-          <label for="codigo">Codigo:</label> <input type="text" readonly id="codigo" class="readonly" />
-          <br />
-          <label for="txtNomeTime">Nome:</label> <input type="text" readonly id="txtNomeTime" class="readonly" />
-          <br />
-          <label for="txtNomeDivisao">Divisão:</label> <input type="text" readonly id="txtNomeDivisao" class="readonly" />
-          <br />
-          <label for="txtNomeTecnico">Tecnico:</label> <input type="text" readonly id="txtNomeTecnico" class="readonly" />
-          <br />
-          <label for="txtNomeCategoria">Categoria:</label> <input type="text" readonly id="txtNomeCategoria" class="readonly" />
-          <br />
-          <label for="txtDesempenhoTime">Desempenho Time:</label> <input type="text" readonly id="txtDesempenhoTime" class="readonly" />
-          <br />
-          <label for="txtComprarNovoJogador">Comprar novo jogador:</label> <input type="text" readonly id="txtComprarNovoJogador" class="readonly" />
-      </div>
-			
-			<footer id="rodape">
-      </footer>
+        <link rel="stylesheet" href="../../css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp">
 
-		</div>
-	</body>
+        <script src="../../javascript/jquery.min.js"></script>
+
+        <script src="../../javascript/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"></script>
+
+        <noscript>Seu navegador não suporta JavaScript ou mesmo foi desabilitado!</noscript>    
+    </head>
+    
+    <body>
+        <header>
+            <div id="headerimg"></div>
+
+            <nav class="navbar navbar-default">
+                <a class="navbar-brand" href="../paginas/home.htm">Home</a>
+                <a class="navbar-brand" href="../paginas/cadastros.htm">Cadastros</a>
+                <a class="navbar-brand" href="../paginas/administrar.htm">Administrar</a>
+                <a class="navbar-brand" href="../paginas/consultas.htm">Consultas</a>
+                <a class="navbar-brand" href="../formularios/logout.htm">Sair</a>
+            </nav>
+        </header>
+
+        <div class="container">
+            <div class="col-sm-6 pull-left"> 
+                    <h2 class="titulo">Detalhes do time</h2>
+                    <div class="form-group">
+                        <label for="codigo">Codigo</label> 
+                        <input type="text" readonly id="codigo" class="form-control readonly" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="txtNome">Nome</label> 
+                        <input type="text" readonly id="txtNome" class="form-control readonly" />
+                    </div>
+            </div>
+        </div>
+
+        <footer></footer>   
+    </body>
 </html>
+
+                
