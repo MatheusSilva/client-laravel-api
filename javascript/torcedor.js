@@ -341,6 +341,86 @@ class Torcedor
         } 
     }
 
+    static alterarMinhaSenhaLogado(form)
+    {
+        document.getElementById("mensagem").innerHTML = "<br /><b>Aguarde...</b>";
+        var xhr = Util.createXHR();
+        var mensagem = "";
+
+        if (form.txtSenha.value == "") {
+            mensagem += "<br /><b>Você não preencheu a senha</b>";
+        }
+
+        if (form.txtConfSenha.value == "") {
+            mensagem += "<br /><b>Você não preencheu a confirmação da nova senha</b>";
+        }
+
+        if(mensagem == "" && xhr != undefined) {
+            xhr.open("PUT","http://localhost/laravel-api/public/api/v1/altsenhalog",true);
+            xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+            xhr.onreadystatechange = function() {
+                //Verificar pelo estado "4" de pronto.
+
+                if (xhr.readyState == '4') {
+                    //Pegar dados da resposta json
+                    var json = JSON.parse(xhr.responseText);
+
+                    if (xhr.status == '200' || xhr.status == '201') {
+                        document.getElementById("mensagem").innerHTML = "Senha alterada com sucesso.";
+                    } else if (xhr.status == '422') {
+                        var strErrosValidate = "";
+
+                        if (json.validate_error.hasOwnProperty('password_current_invalid') == false) {
+                            strErrosValidate += "<br /><b>Senha atual inválida.</b>";
+                        }
+
+                        if (json.validate_error.password !== undefined) {
+                            strErrosValidate += json.validate_error.password[0];
+                        }
+
+                        if (json.validate_error.password_confirmation !== undefined) {
+                            strErrosValidate += json.validate_error.password_confirmation[0];
+                        }
+
+                        if (strErrosValidate !== '') {
+                            document.getElementById("mensagem").innerHTML = "<br /><b>"+strErrosValidate+"</b>";    
+                        } else {
+                            document.getElementById("mensagem").innerHTML = "<br /><b>Algum erro desconhecido ocorreu.</b>";
+                        }
+                    } else if (xhr.status == '500') {
+                        if (json.error !== undefined && json.error === 'token_invalid') {
+                            document.getElementById("mensagem").innerHTML = "<br /><b>Token inválido. Faça o login novamente.</b>";
+                        } else {
+                            document.getElementById("mensagem").innerHTML = "<br /><b>Algum erro desconhecido ocorreu.</b>";
+                        }
+                    } else if (xhr.status == '401') {
+                        if (json.error !== undefined && json.error === 'token_expired') {
+                            document.getElementById("mensagem").innerHTML = "<br /><b>Token expirado. Faça o login novamente.</b>";
+                        } else {
+                            document.getElementById("mensagem").innerHTML = "<br /><b>Algum erro desconhecido ocorreu.</b>";
+                        }
+                    } else {
+                        document.getElementById("mensagem").innerHTML = "<br /><b>Algum erro desconhecido ocorreu.</b>";
+                    }
+                }
+            }
+            
+            var form = JSON.stringify({
+                "password_current":  form.txtSenhaAtual.value,
+                "password":  form.txtSenha.value,
+                "password_confirmation":  form.txtConfSenha.value;
+            });
+
+            var jwtoken = '';
+            jwtoken = Util.getCookie('token');
+
+            xhr.setRequestHeader('Authorization', 'Bearer ' + jwtoken);
+            xhr.send(form);
+        } else {
+            document.getElementById("mensagem").innerHTML = mensagem;
+        }
+    }
+
     static insereDadosTorcedorRetornados(codigo)  
     {
         var xhr = Util.createXHR();
