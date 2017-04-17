@@ -1,6 +1,6 @@
 function valida(form)
 {
-	var filepatch = "<img src='http://localhost/time/sistema/img/erro.png'>";
+	var filepatch = "<img src='http://192.168.33.10/time/sistema/img/erro.png'>";
 	var erro_nome="<p style='color:#ff0000'> "+filepatch+" Preencha o campo Nome</p>"
 	var erro_login="<p style='color:#ff0000'> "+filepatch+" Preencha o campo Login</p>"
 	var erro_senha="<p style='color:#ff0000'> "+filepatch+" Preencha o campo Senha</p>"

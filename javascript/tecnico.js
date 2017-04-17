@@ -59,7 +59,7 @@ class Tecnico
         serverSide: true,
         dom: "Bfrtip",        
         ajax : {
-         "url": 'http://localhost/laravel-api/public/api/v1/tecnicos',
+         "url": 'http://192.168.33.10/laravel-api/public/api/v1/tecnicos',
          "dataType": 'json',
          "type": "GET",
          "beforeSend": function(xhr){
@@ -113,7 +113,7 @@ class Tecnico
     static detalhe(codigo)
     {
         var xhr = Util.createXHR();
-        xhr.open("GET","http://localhost/laravel-api/public/api/v1/tecnicos/"+codigo,true);
+        xhr.open("GET","http://192.168.33.10/laravel-api/public/api/v1/tecnicos/"+codigo,true);
         xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
         xhr.onreadystatechange = function() {
             //Verificar pelo estado "4" de pronto.
@@ -237,7 +237,7 @@ class Tecnico
             }
             
             if(mensagem == "") {
-                xhr.open("DELETE","http://localhost/laravel-api/public/api/v1/tecnicos/"+codigo, true);
+                xhr.open("DELETE","http://192.168.33.10/laravel-api/public/api/v1/tecnicos/"+codigo, true);
                 xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
                 xhr.onreadystatechange = function() {
                     Tecnico.callbackCadAltDel(xhr, 'exc');
@@ -271,7 +271,7 @@ class Tecnico
         var xhr = Util.createXHR();
 
         if (mensagem == "" && xhr != undefined) {
-            xhr.open("POST","http://localhost/laravel-api/public/api/v1/tecnicos", true);
+            xhr.open("POST","http://192.168.33.10/laravel-api/public/api/v1/tecnicos", true);
             xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
             xhr.onreadystatechange = function() {
                 Tecnico.callbackCadAltDel(xhr, 'cad');
@@ -306,7 +306,7 @@ class Tecnico
         var xhr = Util.createXHR();
         
         if(mensagem == "" && xhr != undefined) {
-            xhr.open("PUT","http://localhost/laravel-api/public/api/v1/tecnicos/"+codigo,true);
+            xhr.open("PUT","http://192.168.33.10/laravel-api/public/api/v1/tecnicos/"+codigo,true);
             xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
             xhr.onreadystatechange = function() {
                 Tecnico.callbackCadAltDel(xhr, 'alt');

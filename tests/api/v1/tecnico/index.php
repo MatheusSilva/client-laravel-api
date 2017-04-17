@@ -28,7 +28,7 @@ class TecnicoTest extends PHPUnit_Framework_TestCase
     
     public function testTokenInvalidoSalvarTecnico()
     {
-        $url = 'http://localhost/sistemaRest/api/v1/controller/tecnico.php?a=4&tk=asdasd';
+        $url = 'http://192.168.33.10/sistemaRest/api/v1/controller/tecnico.php?a=4&tk=asdasd';
         $data = array(
             'txtNome' => ""
             ,'cmbDia' => ""
@@ -42,7 +42,7 @@ class TecnicoTest extends PHPUnit_Framework_TestCase
 
     public function testTokenInvalidoAlterarTecnico()
     {
-        $url = 'http://localhost/sistemaRest/api/v1/controller/tecnico.php?a=5&tk=asdasd';
+        $url = 'http://192.168.33.10/sistemaRest/api/v1/controller/tecnico.php?a=5&tk=asdasd';
         $data = array(
             'txtNome' => ""
             ,'cmbDia' => ""
@@ -56,7 +56,7 @@ class TecnicoTest extends PHPUnit_Framework_TestCase
     
     public function testNomeEmBrancoSalvarTecnico()
     {
-        $url = 'http://localhost/sistemaRest/api/v1/controller/tecnico.php?a=4&tk='.$this->token;
+        $url = 'http://192.168.33.10/sistemaRest/api/v1/controller/tecnico.php?a=4&tk='.$this->token;
         $data = array(
             'txtNome' => ""
             ,'cmbDia' => ""
@@ -70,7 +70,7 @@ class TecnicoTest extends PHPUnit_Framework_TestCase
 
     public function testNomeEmBrancoAlterarTecnico()
     {
-        $url = 'http://localhost/sistemaRest/api/v1/controller/tecnico.php?a=5&id=1&tk='.$this->token;
+        $url = 'http://192.168.33.10/sistemaRest/api/v1/controller/tecnico.php?a=5&id=1&tk='.$this->token;
         $data = array(
             'txtNome' => ""
             ,'cmbDia' => ""
@@ -84,7 +84,7 @@ class TecnicoTest extends PHPUnit_Framework_TestCase
     
     public function testNomeValidoSalvarTecnico()
     {
-        $url = 'http://localhost/sistemaRest/api/v1/controller/tecnico.php?a=4&tk='.$this->token;
+        $url = 'http://192.168.33.10/sistemaRest/api/v1/controller/tecnico.php?a=4&tk='.$this->token;
 
         $rand = uniqid(rand(), true);
         $rand = str_replace(".", "", $rand);
@@ -114,7 +114,7 @@ class TecnicoTest extends PHPUnit_Framework_TestCase
 
     public function testNomeDuplicadoSalvarTecnico()
     {
-        $url = 'http://localhost/sistemaRest/api/v1/controller/tecnico.php?a=4&tk='.$this->token;
+        $url = 'http://192.168.33.10/sistemaRest/api/v1/controller/tecnico.php?a=4&tk='.$this->token;
 
         $data = array(
             'txtNome' => 'testephpunit'
@@ -129,7 +129,7 @@ class TecnicoTest extends PHPUnit_Framework_TestCase
 
     public function testNomeValidoAlterarTecnico()
     {
-        $url = 'http://localhost/sistemaRest/api/v1/controller/tecnico.php?a=5&id=18&tk='.$this->token;
+        $url = 'http://192.168.33.10/sistemaRest/api/v1/controller/tecnico.php?a=5&id=18&tk='.$this->token;
         $data = array(
             'txtNome' => 'sub 26'
             ,'cmbDia' => 11
@@ -144,7 +144,7 @@ class TecnicoTest extends PHPUnit_Framework_TestCase
 
     public function testAlterarTecnicoInexistente()
     {
-        $url = 'http://localhost/sistemaRest/api/v1/controller/tecnico.php?a=5&id=999&tk='.$this->token;
+        $url = 'http://192.168.33.10/sistemaRest/api/v1/controller/tecnico.php?a=5&id=999&tk='.$this->token;
        $data = array(
             'txtNome' => ""
             ,'cmbDia' => ""
@@ -159,7 +159,7 @@ class TecnicoTest extends PHPUnit_Framework_TestCase
 
     public function testAlterarTecnicoInvalida()
     {
-        $url = 'http://localhost/sistemaRest/api/v1/controller/tecnico.php?a=5&id=asds&tk='.$this->token;
+        $url = 'http://192.168.33.10/sistemaRest/api/v1/controller/tecnico.php?a=5&id=asds&tk='.$this->token;
         $data = array(
             'txtNome' => ""
             ,'cmbDia' => ""
@@ -173,7 +173,7 @@ class TecnicoTest extends PHPUnit_Framework_TestCase
 
     public function testExcluirTecnicoInexistente()
     {
-        $url = 'http://localhost/sistemaRest/api/v1/controller/tecnico.php?a=6&id=999&tk='.$this->token;
+        $url = 'http://192.168.33.10/sistemaRest/api/v1/controller/tecnico.php?a=6&id=999&tk='.$this->token;
         $data = array();
         $result = $this->api($url, $data, "POST");
         $this->assertEquals('Código inexistente.', $result["mensagem"]);
@@ -181,7 +181,7 @@ class TecnicoTest extends PHPUnit_Framework_TestCase
 
     public function testExcluirTecnicoInvalida()
     {
-        $url = 'http://localhost/sistemaRest/api/v1/controller/tecnico.php?a=6&id=asds&tk='.$this->token;
+        $url = 'http://192.168.33.10/sistemaRest/api/v1/controller/tecnico.php?a=6&id=asds&tk='.$this->token;
         $data = array();
         $result = $this->api($url, $data, "POST");
         $this->assertEquals('Código inválido.', $result["mensagem"]);
@@ -189,7 +189,7 @@ class TecnicoTest extends PHPUnit_Framework_TestCase
 
     public function testExcluirTecnicoVinculadaTime()
     {
-        $url = 'http://localhost/sistemaRest/api/v1/controller/tecnico.php?a=6&id=1&tk='.$this->token;
+        $url = 'http://192.168.33.10/sistemaRest/api/v1/controller/tecnico.php?a=6&id=1&tk='.$this->token;
         $data = array();
         $result = $this->api($url, $data, "POST");
         $this->assertEquals(
@@ -200,7 +200,7 @@ class TecnicoTest extends PHPUnit_Framework_TestCase
 
     public function testExcluirTecnico()
     {
-        $url = 'http://localhost/sistemaRest/api/v1/controller/tecnico.php?a=6&id=31&tk='.$this->token;
+        $url = 'http://192.168.33.10/sistemaRest/api/v1/controller/tecnico.php?a=6&id=31&tk='.$this->token;
         $data = array();
         $result = $this->api($url, $data, "POST");
         $this->assertEquals('Técnico excluido com sucesso.', $result["mensagem"]);

@@ -3,7 +3,7 @@ require_once "../../vendor/autoload.php";
 
 use MatthiasMullie\Minify;
 
-$basePathJs     = "/var/www/html/client-laravel-api/javascript/";
+$basePathJs     = "/var/www/client-laravel-api/javascript/";
 $minifiedPathJs = $basePathJs.'scripts.min.js';
 
 $minifier = new Minify\JS($basePathJs.'util.js');

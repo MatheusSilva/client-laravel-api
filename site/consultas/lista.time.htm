@@ -22,7 +22,7 @@
             document.addEventListener('DOMContentLoaded', function() {
                 var dhtml = "";
                 var xhr = Util.createXHR();
-                xhr.open("GET", "http://localhost/sistemaRest/api/v1/controller/time.php", true);
+                xhr.open("GET", "http://192.168.33.10/sistemaRest/api/v1/controller/time.php", true);
                 xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 
                 xhr.onreadystatechange = function() {
@@ -80,7 +80,7 @@
                 <a class="navbar-brand" href="../../site/paginas/home.htm">Home</a>
                 <a class="navbar-brand" href="../../adm/formularios/cadastro.torcedor.htm">Cadastrar-se</a>
                 <a class="navbar-brand" href="../../site/consultas/lista.time.htm">Consultas</a>
-                <a class="navbar-brand" href="../../adm/paginas/home.htm">Entrar</a>
+                <a class="navbar-brand" href="../../adm/formularios/form.login.htm">Entrar</a>
             </nav>
         </header> 
 

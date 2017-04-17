@@ -35,7 +35,7 @@ class CategoriaTest extends PHPUnit_Framework_TestCase
     
     public function testTokenInvalidoSalvarCategoria()
     {
-        $url = 'http://localhost/sistemaRest/api/v1/controller/categoria.php?a=4&tk=asdasd';
+        $url = 'http://192.168.33.10/sistemaRest/api/v1/controller/categoria.php?a=4&tk=asdasd';
         $data = array('txtNome' => 'NBI');
         $result = $this->api($url, $data, "POST");
         $this->assertEquals('Sua sessão expirou. Faça o login novamente.', $result["mensagem"]);
@@ -43,7 +43,7 @@ class CategoriaTest extends PHPUnit_Framework_TestCase
 
     public function testTokenInvalidoAlterarCategoria()
     {
-        $url = 'http://localhost/sistemaRest/api/v1/controller/categoria.php?a=5&tk=asdasd';
+        $url = 'http://192.168.33.10/sistemaRest/api/v1/controller/categoria.php?a=5&tk=asdasd';
         $data = array('txtNome' => 'NBI');
         $result = $this->api($url, $data, "POST");
         $this->assertEquals('Sua sessão expirou. Faça o login novamente.', $result["mensagem"]);
@@ -51,7 +51,7 @@ class CategoriaTest extends PHPUnit_Framework_TestCase
     
     public function testNomeEmBrancoSalvarCategoria()
     {
-        $url = 'http://localhost/sistemaRest/api/v1/controller/categoria.php?a=4&tk='.$this->token;
+        $url = 'http://192.168.33.10/sistemaRest/api/v1/controller/categoria.php?a=4&tk='.$this->token;
         $data = array('txtNome' => '');
         $result = $this->api($url, $data, "POST");
         $this->assertEquals('O nome da categoria deve ser alfanumérico de 2 a 30 caracteres.', $result["mensagem"]);
@@ -59,7 +59,7 @@ class CategoriaTest extends PHPUnit_Framework_TestCase
 
     public function testNomeEmBrancoAlterarCategoria()
     {
-        $url = 'http://localhost/sistemaRest/api/v1/controller/categoria.php?a=5&id=1&tk='.$this->token;
+        $url = 'http://192.168.33.10/sistemaRest/api/v1/controller/categoria.php?a=5&id=1&tk='.$this->token;
         $data = array('txtNome' => '');
         $result = $this->api($url, $data, "POST");
         $this->assertEquals('O nome da categoria deve ser alfanumérico de 2 a 30 caracteres.', $result["mensagem"]);
@@ -67,7 +67,7 @@ class CategoriaTest extends PHPUnit_Framework_TestCase
     
     public function testNomeValidoSalvarCategoria()
     {
-        $url = 'http://localhost/sistemaRest/api/v1/controller/categoria.php?a=4&tk='.$this->token;
+        $url = 'http://192.168.33.10/sistemaRest/api/v1/controller/categoria.php?a=4&tk='.$this->token;
         $rand = uniqid(rand(), true);
         $rand = str_replace(".", "", $rand);
         $rand = str_replace("0", "", $rand);
@@ -89,7 +89,7 @@ class CategoriaTest extends PHPUnit_Framework_TestCase
 
     public function testNomeDuplicadoSalvarCategoria()
     {
-        $url = 'http://localhost/sistemaRest/api/v1/controller/categoria.php?a=4&tk='.$this->token;
+        $url = 'http://192.168.33.10/sistemaRest/api/v1/controller/categoria.php?a=4&tk='.$this->token;
 
         $data = array('txtNome' => "ddbe");
         $result = $this->api($url, $data, "POST");
@@ -98,7 +98,7 @@ class CategoriaTest extends PHPUnit_Framework_TestCase
 
     public function testNomeValidoAlterarCategoria()
     {
-        $url = 'http://localhost/sistemaRest/api/v1/controller/categoria.php?a=5&id=18&tk='.$this->token;
+        $url = 'http://192.168.33.10/sistemaRest/api/v1/controller/categoria.php?a=5&id=18&tk='.$this->token;
         //$rand = uniqid(rand(), true);
         $data = array('txtNome' => "sdasdasdsad11111");
         $result = $this->api($url, $data, "POST");
@@ -108,7 +108,7 @@ class CategoriaTest extends PHPUnit_Framework_TestCase
 
     public function testAlterarCategoriaInexistente()
     {
-        $url = 'http://localhost/sistemaRest/api/v1/controller/categoria.php?a=5&id=999&tk='.$this->token;
+        $url = 'http://192.168.33.10/sistemaRest/api/v1/controller/categoria.php?a=5&id=999&tk='.$this->token;
         $data = array('txtNome' => 'sub 25');
         $result = $this->api($url, $data, "POST");
         $this->assertEquals('Código inexistente.', $result["mensagem"]);
@@ -117,7 +117,7 @@ class CategoriaTest extends PHPUnit_Framework_TestCase
 
     public function testAlterarCategoriaInvalida()
     {
-        $url = 'http://localhost/sistemaRest/api/v1/controller/categoria.php?a=5&id=asds&tk='.$this->token;
+        $url = 'http://192.168.33.10/sistemaRest/api/v1/controller/categoria.php?a=5&id=asds&tk='.$this->token;
         $data = array('txtNome' => 'sub 25');
         $result = $this->api($url, $data, "POST");
         $this->assertEquals('Código inválido.', $result["mensagem"]);
@@ -125,7 +125,7 @@ class CategoriaTest extends PHPUnit_Framework_TestCase
 
     public function testExcluirCategoriaInexistente()
     {
-        $url = 'http://localhost/sistemaRest/api/v1/controller/categoria.php?a=6&id=999&tk='.$this->token;
+        $url = 'http://192.168.33.10/sistemaRest/api/v1/controller/categoria.php?a=6&id=999&tk='.$this->token;
         $data = array();
         $result = $this->api($url, $data, "POST");
         $this->assertEquals('Código inexistente.', $result["mensagem"]);
@@ -133,7 +133,7 @@ class CategoriaTest extends PHPUnit_Framework_TestCase
 
     public function testExcluirCategoriaInvalida()
     {
-        $url = 'http://localhost/sistemaRest/api/v1/controller/categoria.php?a=6&id=asds&tk='.$this->token;
+        $url = 'http://192.168.33.10/sistemaRest/api/v1/controller/categoria.php?a=6&id=asds&tk='.$this->token;
         $data = array();
         $result = $this->api($url, $data, "POST");
         $this->assertEquals('Código inválido.', $result["mensagem"]);
@@ -141,7 +141,7 @@ class CategoriaTest extends PHPUnit_Framework_TestCase
 
     public function testExcluirCategoriaVinculadaTime()
     {
-        $url = 'http://localhost/sistemaRest/api/v1/controller/categoria.php?a=6&id=1&tk='.$this->token;
+        $url = 'http://192.168.33.10/sistemaRest/api/v1/controller/categoria.php?a=6&id=1&tk='.$this->token;
         $data = array();
         $result = $this->api($url, $data, "POST");
         $this->assertEquals(
@@ -152,7 +152,7 @@ class CategoriaTest extends PHPUnit_Framework_TestCase
 
     public function testExcluirCategoria()
     {
-        $url = 'http://localhost/sistemaRest/api/v1/controller/categoria.php?a=6&id=27&tk='.$this->token;
+        $url = 'http://192.168.33.10/sistemaRest/api/v1/controller/categoria.php?a=6&id=27&tk='.$this->token;
         $data = array();
         $result = $this->api($url, $data, "POST");
         $this->assertEquals('Categoria excluida com sucesso.', $result["mensagem"]);

@@ -77,12 +77,12 @@ class Util
         var xhr = Util.createXHR();
 
         if (xhr != undefined) {
-            xhr.open("GET","http://localhost/laravel-api/public/api/v1/logado", true);
+            xhr.open("GET","http://192.168.33.10/laravel-api/public/api/v1/logado", true);
             xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
             xhr.onreadystatechange = function() {
                  //Verificar pelo estado "4" de pronto.
                 if (xhr.readyState == '4' && xhr.status != '200') {
-                    window.location = "http://localhost/client-laravel-api/adm/formularios/form.login.htm"; 
+                    window.location = "http://192.168.33.10/client-laravel-api/adm/formularios/form.login.htm"; 
                 }
             }
 
@@ -93,10 +93,10 @@ class Util
                 xhr.setRequestHeader('Authorization', 'Bearer ' + jwtoken);
                 xhr.send();
             } else {
-                window.location = "http://localhost/client-laravel-api/adm/formularios/form.login.htm";
+                window.location = "http://192.168.33.10/client-laravel-api/adm/formularios/form.login.htm";
             }
         } else {
-            window.location = "http://localhost/client-laravel-api/adm/formularios/form.login.htm";
+            window.location = "http://192.168.33.10/client-laravel-api/adm/formularios/form.login.htm";
         }
     }
 
@@ -107,13 +107,13 @@ class Util
         var xhr = Util.createXHR();
 
         if (xhr != undefined) {
-            xhr.open("GET","http://localhost/laravel-api/public/api/v1/logout", true);
+            xhr.open("GET","http://192.168.33.10/laravel-api/public/api/v1/logout", true);
             xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
             xhr.onreadystatechange = function() {
                  //Verificar pelo estado "4" de pronto.
                 if (xhr.readyState == '4') {
                     Util.createCookie('token', '', -1);
-                    window.location = "http://localhost/client-laravel-api/site/paginas/home.htm";
+                    window.location = "http://192.168.33.10/client-laravel-api/site/paginas/home.htm";
                 }
             }
 
@@ -125,10 +125,10 @@ class Util
                 xhr.send();
             }
 
-            window.location = "http://localhost/client-laravel-api/site/paginas/home.htm";
+            window.location = "http://192.168.33.10/client-laravel-api/site/paginas/home.htm";
         } else {
             Util.createCookie('token', '', -1);
-            window.location = "http://localhost/client-laravel-api/site/paginas/home.htm";
+            window.location = "http://192.168.33.10/client-laravel-api/site/paginas/home.htm";
         }
     }
 }
