@@ -1,6 +1,6 @@
 /vendor
 /img
-/nbproject/private/
+/nbproject
 .settings
 .project
 .buildpath

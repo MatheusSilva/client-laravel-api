@@ -227,15 +227,15 @@ class Torcedor
             } else if (xhr.status == '422') {
                 var strErrosValidate = "";
 
-                if (json.json.validate_error.name !== undefined) {
+                if (json.validate_error.name !== undefined) {
                     strErrosValidate += json.validate_error.name[0];
                 }
 
-                if (json.json.validate_error.email !== undefined) {
+                if (json.validate_error.email !== undefined) {
                     strErrosValidate += json.validate_error.email[0];
                 }
 
-                if (json.json.validate_error.password !== undefined) {
+                if (json.validate_error.password !== undefined) {
                     strErrosValidate += json.validate_error.password[0];
                 }
 
@@ -340,7 +340,7 @@ class Torcedor
             document.getElementById("mensagem").innerHTML = mensagem;
         } 
     }
-
+    
     static alterarMinhaSenhaLogado(form)
     {
         document.getElementById("mensagem").innerHTML = "<br /><b>Aguarde...</b>";
@@ -415,6 +415,132 @@ class Torcedor
             jwtoken = Util.getCookie('token');
 
             xhr.setRequestHeader('Authorization', 'Bearer ' + jwtoken);
+            xhr.send(form);
+        } else {
+            document.getElementById("mensagem").innerHTML = mensagem;
+        }
+    }
+    
+    static esqueciMinhaSenha(form)
+    {
+        document.getElementById("mensagem").innerHTML = "<br /><b>Aguarde...</b>";
+        var xhr = Util.createXHR();
+        var mensagem = "";
+
+        if (form.txtEmail.value == "") {
+            mensagem += "<br /><b>Você não preencheu o E-mail</b>";
+        }
+
+        if(mensagem == "" && xhr != undefined) {
+            xhr.open("PUT","http://192.168.33.10/laravel-api/public/api/v1/esquecisenha",true);
+            xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+            xhr.onreadystatechange = function() {
+                //Verificar pelo estado "4" de pronto.
+
+                if (xhr.readyState == '4') {
+                    //Pegar dados da resposta json
+                    var json = JSON.parse(xhr.responseText);
+
+                    if (xhr.status == '200' || xhr.status == '201') {
+                        document.getElementById("mensagem").innerHTML = "Link de redefinição enviado com sucesso.";
+                    } else if (xhr.status == '422') {
+                        var strErrosValidate = "";
+
+                        if (json.validate_error.email !== undefined) {
+                            strErrosValidate += json.validate_error.email[0];
+                        }
+
+                        if (strErrosValidate !== '') {
+                            document.getElementById("mensagem").innerHTML = "<br /><b>"+strErrosValidate+"</b>";    
+                        } else {
+                            document.getElementById("mensagem").innerHTML = "<br /><b>Algum erro desconhecido ocorreu.</b>";
+                        }
+                    } else {
+                        document.getElementById("mensagem").innerHTML = "<br /><b>Algum erro desconhecido ocorreu.</b>";
+                    }
+                }
+            }
+            
+            var form = JSON.stringify({
+                "email":  form.txtEmail.value
+            });
+
+            xhr.send(form);
+        } else {
+            document.getElementById("mensagem").innerHTML = mensagem;
+        }
+    }
+    
+    static alterarMinhaSenha(form)
+    {
+        document.getElementById("mensagem").innerHTML = "<br /><b>Aguarde...</b>";
+        var xhr = Util.createXHR();
+        var mensagem = "";
+
+        if (form.txtSenha.value == "") {
+            mensagem += "<br /><b>Você não preencheu a senha</b>";
+        }
+
+        if (form.txtConfSenha.value == "") {
+            mensagem += "<br /><b>Você não preencheu a confirmação da nova senha</b>";
+        }
+
+        if(mensagem == "" && xhr != undefined) {
+            xhr.open("PUT","http://192.168.33.10/laravel-api/public/api/v1/altsenha",true);
+            xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+            xhr.onreadystatechange = function() {
+                //Verificar pelo estado "4" de pronto.
+
+                if (xhr.readyState == '4') {
+                    //Pegar dados da resposta json
+                    var json = JSON.parse(xhr.responseText);
+
+                    if (xhr.status == '200' || xhr.status == '201') {
+                        document.getElementById("mensagem").innerHTML = "Senha alterada com sucesso.";
+                    } else if (xhr.status == '422') {
+                        var strErrosValidate = "";
+
+                        if (json.validate_error.hasOwnProperty('forgot_token')) {
+                            strErrosValidate += "<br /><b>Link de redefinição inválido ou expirado.</b>";
+                        }
+
+                        if (json.validate_error.password !== undefined) {
+                            strErrosValidate += json.validate_error.password[0];
+                        }
+
+                        if (json.validate_error.password_confirmation !== undefined) {
+                            strErrosValidate += json.validate_error.password_confirmation[0];
+                        }
+
+                        if (strErrosValidate !== '') {
+                            document.getElementById("mensagem").innerHTML = "<br /><b>"+strErrosValidate+"</b>";    
+                        } else {
+                            document.getElementById("mensagem").innerHTML = "<br /><b>Algum erro desconhecido ocorreu.</b>";
+                        }
+                    } else if (xhr.status == '500') {
+                        if (json.error !== undefined && json.error === 'token_invalid') {
+                            document.getElementById("mensagem").innerHTML = "<br /><b>Token inválido. Faça o login novamente.</b>";
+                        } else {
+                            document.getElementById("mensagem").innerHTML = "<br /><b>Algum erro desconhecido ocorreu.</b>";
+                        }
+                    } else if (xhr.status == '401') {
+                        if (json.error !== undefined && json.error === 'token_expired') {
+                            document.getElementById("mensagem").innerHTML = "<br /><b>Token expirado. Faça o login novamente.</b>";
+                        } else {
+                            document.getElementById("mensagem").innerHTML = "<br /><b>Algum erro desconhecido ocorreu.</b>";
+                        }
+                    } else {
+                        document.getElementById("mensagem").innerHTML = "<br /><b>Algum erro desconhecido ocorreu.</b>";
+                    }
+                }
+            }
+            
+            var form = JSON.stringify({
+                "forgot_token":  form.txtForgotToken.value,
+                "password":  form.txtSenha.value,
+                "password_confirmation":  form.txtConfSenha.value;
+            });
+
             xhr.send(form);
         } else {
             document.getElementById("mensagem").innerHTML = mensagem;
