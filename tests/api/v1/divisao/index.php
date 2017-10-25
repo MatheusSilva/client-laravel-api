@@ -28,7 +28,7 @@ class DivisaoTest extends PHPUnit_Framework_TestCase
     
     public function testTokenInvalidoSalvarDivisao()
     {
-        $url = 'http://192.168.33.10/sistemaRest/api/v1/controller/divisao.php?a=4&tk=asdasd';
+        $url = 'http://127.0.0.1/sistemaRest/api/v1/controller/divisao.php?a=4&tk=asdasd';
         $data = array('txtNome' => 'NBI');
         $result = $this->api($url, $data, "POST");
         $this->assertEquals('Sua sessão expirou. Faça o login novamente.', $result["mensagem"]);
@@ -36,7 +36,7 @@ class DivisaoTest extends PHPUnit_Framework_TestCase
 
     public function testTokenInvalidoAlterarDivisao()
     {
-        $url = 'http://192.168.33.10/sistemaRest/api/v1/controller/divisao.php?a=5&tk=asdasd';
+        $url = 'http://127.0.0.1/sistemaRest/api/v1/controller/divisao.php?a=5&tk=asdasd';
         $data = array('txtNome' => 'NBI');
         $result = $this->api($url, $data, "POST");
         $this->assertEquals('Sua sessão expirou. Faça o login novamente.', $result["mensagem"]);
@@ -44,7 +44,7 @@ class DivisaoTest extends PHPUnit_Framework_TestCase
     
     public function testNomeEmBrancoSalvarDivisao()
     {
-        $url = 'http://192.168.33.10/sistemaRest/api/v1/controller/divisao.php?a=4&tk='.$this->token;
+        $url = 'http://127.0.0.1/sistemaRest/api/v1/controller/divisao.php?a=4&tk='.$this->token;
         $data = array('txtNome' => '');
         $result = $this->api($url, $data, "POST");
         $this->assertEquals('O nome da divisão deve ser alfanumérico de 2 a 25 caracteres.', $result["mensagem"]);
@@ -52,7 +52,7 @@ class DivisaoTest extends PHPUnit_Framework_TestCase
 
     public function testNomeEmBrancoAlterarDivisao()
     {
-        $url = 'http://192.168.33.10/sistemaRest/api/v1/controller/divisao.php?a=5&id=1&tk='.$this->token;
+        $url = 'http://127.0.0.1/sistemaRest/api/v1/controller/divisao.php?a=5&id=1&tk='.$this->token;
         $data = array('txtNome' => '');
         $result = $this->api($url, $data, "POST");
         $this->assertEquals('O nome da divisão deve ser alfanumérico de 2 a 25 caracteres.', $result["mensagem"]);
@@ -60,7 +60,7 @@ class DivisaoTest extends PHPUnit_Framework_TestCase
     
     public function testNomeValidoSalvarDivisao()
     {
-        $url = 'http://192.168.33.10/sistemaRest/api/v1/controller/divisao.php?a=4&tk='.$this->token;
+        $url = 'http://127.0.0.1/sistemaRest/api/v1/controller/divisao.php?a=4&tk='.$this->token;
         $rand = uniqid(rand(), true);
         $rand = str_replace(".", "", $rand);
         $rand = str_replace("0", "", $rand);
@@ -82,7 +82,7 @@ class DivisaoTest extends PHPUnit_Framework_TestCase
 
     public function testNomeDuplicadoSalvarDivisao()
     {
-        $url = 'http://192.168.33.10/sistemaRest/api/v1/controller/divisao.php?a=4&tk='.$this->token;
+        $url = 'http://127.0.0.1/sistemaRest/api/v1/controller/divisao.php?a=4&tk='.$this->token;
 
         $data = array('txtNome' => "ddbe");
         $result = $this->api($url, $data, "POST");
@@ -91,7 +91,7 @@ class DivisaoTest extends PHPUnit_Framework_TestCase
 
     public function testNomeValidoAlterarDivisao()
     {
-        $url = 'http://192.168.33.10/sistemaRest/api/v1/controller/divisao.php?a=5&id=1&tk='.$this->token;
+        $url = 'http://127.0.0.1/sistemaRest/api/v1/controller/divisao.php?a=5&id=1&tk='.$this->token;
         $data = array('txtNome' => 'segundona');
         $result = $this->api($url, $data, "POST");
         $this->assertEquals('Divisão alterada com sucesso.', $result["mensagem"]);
@@ -100,7 +100,7 @@ class DivisaoTest extends PHPUnit_Framework_TestCase
 
     public function testAlterarDivisaoInexistente()
     {
-        $url = 'http://192.168.33.10/sistemaRest/api/v1/controller/divisao.php?a=5&id=999&tk='.$this->token;
+        $url = 'http://127.0.0.1/sistemaRest/api/v1/controller/divisao.php?a=5&id=999&tk='.$this->token;
         $data = array('txtNome' => 'sub 25');
         $result = $this->api($url, $data, "POST");
         $this->assertEquals('Código inexistente.', $result["mensagem"]);
@@ -109,7 +109,7 @@ class DivisaoTest extends PHPUnit_Framework_TestCase
 
     public function testAlterarDivisaoInvalida()
     {
-        $url = 'http://192.168.33.10/sistemaRest/api/v1/controller/divisao.php?a=5&id=asds&tk='.$this->token;
+        $url = 'http://127.0.0.1/sistemaRest/api/v1/controller/divisao.php?a=5&id=asds&tk='.$this->token;
         $data = array('txtNome' => 'sub 25');
         $result = $this->api($url, $data, "POST");
         $this->assertEquals('Código inválido.', $result["mensagem"]);
@@ -117,7 +117,7 @@ class DivisaoTest extends PHPUnit_Framework_TestCase
 
     public function testExcluirDivisaoInexistente()
     {
-        $url = 'http://192.168.33.10/sistemaRest/api/v1/controller/divisao.php?a=6&id=999&tk='.$this->token;
+        $url = 'http://127.0.0.1/sistemaRest/api/v1/controller/divisao.php?a=6&id=999&tk='.$this->token;
         $data = array();
         $result = $this->api($url, $data, "POST");
         $this->assertEquals('Código inexistente.', $result["mensagem"]);
@@ -125,7 +125,7 @@ class DivisaoTest extends PHPUnit_Framework_TestCase
 
     public function testExcluirDivisaoInvalida()
     {
-        $url = 'http://192.168.33.10/sistemaRest/api/v1/controller/divisao.php?a=6&id=asds&tk='.$this->token;
+        $url = 'http://127.0.0.1/sistemaRest/api/v1/controller/divisao.php?a=6&id=asds&tk='.$this->token;
         $data = array();
         $result = $this->api($url, $data, "POST");
         $this->assertEquals('Código inválido.', $result["mensagem"]);
@@ -133,7 +133,7 @@ class DivisaoTest extends PHPUnit_Framework_TestCase
 
     public function testExcluirDivisaoVinculadaTime()
     {
-        $url = 'http://192.168.33.10/sistemaRest/api/v1/controller/divisao.php?a=6&id=1&tk='.$this->token;
+        $url = 'http://127.0.0.1/sistemaRest/api/v1/controller/divisao.php?a=6&id=1&tk='.$this->token;
         $data = array();
         $result = $this->api($url, $data, "POST");
         $this->assertEquals(
@@ -144,7 +144,7 @@ class DivisaoTest extends PHPUnit_Framework_TestCase
 
     public function testExcluirDivisao()
     {
-        $url = 'http://192.168.33.10/sistemaRest/api/v1/controller/divisao.php?a=6&id=3&tk='.$this->token;
+        $url = 'http://127.0.0.1/sistemaRest/api/v1/controller/divisao.php?a=6&id=3&tk='.$this->token;
         $data = array();
         $result = $this->api($url, $data, "POST");
         $this->assertEquals('Divisão excluida com sucesso.', $result["mensagem"]);

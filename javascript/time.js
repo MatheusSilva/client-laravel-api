@@ -41,7 +41,7 @@ class Time
 
         /* mesmo codigo utilizando jquery
         jQuery.ajax({
-            url: 'http://192.168.33.10/sistemaRest/api/v1/controller/time.php?a=3'+consulta,
+            url: 'http://127.0.0.1/sistemaRest/api/v1/controller/time.php?a=3'+consulta,
             type: 'POST',
             data: jForm,
             dataType: 'json',
@@ -82,7 +82,7 @@ class Time
             jForm.append("comprar_novo_jogador", document.querySelector('input[name="rComprarnovojogador"]:checked').value);
         
             //Montar requisição
-            xhr.open("POST","http://192.168.33.10/laravel-api/public/api/v1/times");
+            xhr.open("POST","http://127.0.0.1/laravel-api/public/api/v1/times");
 
             xhr.onreadystatechange = function() {
                 //Verificar pelo estado "4" de pronto.
@@ -107,7 +107,7 @@ class Time
     {
         /* mesmo codigo utilizando jquery
         jQuery.ajax({
-            url: 'http://192.168.33.10/sistemaRest/api/v1/controller/time.php?a=4'+codigo+consulta,
+            url: 'http://127.0.0.1/sistemaRest/api/v1/controller/time.php?a=4'+codigo+consulta,
             type: 'POST',
             data: jForm,
             async: false,
@@ -158,7 +158,7 @@ class Time
             var assincrono = true; // true para assincrono e false para sincrono
         
             //Montar requisição
-            xhr.open("POST","http://192.168.33.10/laravel-api/public/api/v1/times"+codigo, assincrono);
+            xhr.open("POST","http://127.0.0.1/laravel-api/public/api/v1/times"+codigo, assincrono);
 
             xhr.onreadystatechange = function() {
                 //Verificar pelo estado "4" de pronto.
@@ -193,7 +193,7 @@ class Time
             var xhr = Util.createXHR();
             
             if (mensagem === "" && xhr != undefined) {
-                xhr.open("DELETE","http://192.168.33.10/laravel-api/public/api/v1/times"+codigo,true);
+                xhr.open("DELETE","http://127.0.0.1/laravel-api/public/api/v1/times"+codigo,true);
                 xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
                 xhr.onreadystatechange = function() {
                     //Verificar pelo estado "4" de pronto.
@@ -227,7 +227,7 @@ class Time
         serverSide: true,
         dom: "Bfrtip",        
         ajax : {
-         "url": 'http://192.168.33.10/laravel-api/public/api/v1/times',
+         "url": 'http://127.0.0.1/laravel-api/public/api/v1/times',
          "dataType": 'json',
          "type": "GET",
          "beforeSend": function(xhr){
@@ -281,7 +281,7 @@ class Time
     static detalhe(codigo, selecionarcombos = false)
     {
         var xhr = Util.createXHR();
-        xhr.open("GET","http://192.168.33.10/laravel-api/public/api/v1/times/"+codigo);
+        xhr.open("GET","http://127.0.0.1/laravel-api/public/api/v1/times/"+codigo);
         xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
         xhr.onreadystatechange = function() {
             //Verificar pelo estado "4" de pronto.
@@ -315,7 +315,7 @@ class Time
         if(xhr != undefined) {
             //Montar requisição
 
-            xhr.open("GET","http://192.168.33.10/laravel-api/public/api/v1/divisoes/listar-tudo");
+            xhr.open("GET","http://127.0.0.1/laravel-api/public/api/v1/divisoes/listar-tudo");
             //xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
             xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
             xhr.onreadystatechange = function() {
@@ -359,7 +359,7 @@ class Time
         if(xhr != undefined) {
 
             //Montar requisição
-            xhr.open("GET","http://192.168.33.10/laravel-api/public/api/v1/categorias/listar-tudo");
+            xhr.open("GET","http://127.0.0.1/laravel-api/public/api/v1/categorias/listar-tudo");
             xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
             xhr.onreadystatechange = function() {
                 //Verificar pelo estado "4" de pronto.
@@ -403,7 +403,7 @@ class Time
         if(xhr != undefined) {
 
             //Montar requisição
-            xhr.open("GET","http://192.168.33.10/laravel-api/public/api/v1/tecnicos/listar-tudo");
+            xhr.open("GET","http://127.0.0.1/laravel-api/public/api/v1/tecnicos/listar-tudo");
             xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
             xhr.onreadystatechange = function() {
                 //Verificar pelo estado "4" de pronto.

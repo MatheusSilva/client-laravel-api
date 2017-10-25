@@ -29,7 +29,7 @@ class Categoria
         serverSide: true,
         dom: "Bfrtip",        
         ajax : {
-         "url": 'http://192.168.33.10/laravel-api/public/api/v1/categorias',
+         "url": 'http://127.0.0.1/laravel-api/public/api/v1/categorias',
          "dataType": 'json',
          "type": "GET",
          "beforeSend": function(xhr){
@@ -84,7 +84,7 @@ class Categoria
     static detalhe(codigo)
     {
         var xhr = Util.createXHR();
-        xhr.open("GET","http://192.168.33.10/laravel-api/public/api/v1/categorias/"+codigo,true);
+        xhr.open("GET","http://127.0.0.1/laravel-api/public/api/v1/categorias/"+codigo,true);
         xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
         xhr.onreadystatechange = function() {
             //Verificar pelo estado "4" de pronto.
@@ -177,7 +177,7 @@ class Categoria
             }
                     
             if (mensagem == "" && xhr != undefined) {
-                xhr.open("DELETE","http://192.168.33.10/laravel-api/public/api/v1/categorias/"+codigo,true);
+                xhr.open("DELETE","http://127.0.0.1/laravel-api/public/api/v1/categorias/"+codigo,true);
                 xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
                 xhr.onreadystatechange = function() {
                     Tecnico.callbackCadAltDel(xhr, 'exc');
@@ -210,7 +210,7 @@ class Categoria
         }
 
         if (mensagem == "" && xhr != undefined) {
-            xhr.open("POST","http://192.168.33.10/laravel-api/public/api/v1/categorias",true);
+            xhr.open("POST","http://127.0.0.1/laravel-api/public/api/v1/categorias",true);
             xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
             xhr.onreadystatechange = function() {
                 Categoria.callbackCadAltDel(xhr, 'cad');
@@ -250,7 +250,7 @@ class Categoria
         var xhr = Util.createXHR();
 
         if(mensagem == "" && xhr != undefined) {
-            xhr.open("PUT","http://192.168.33.10/laravel-api/public/api/v1/categorias/"+codigo,true);
+            xhr.open("PUT","http://127.0.0.1/laravel-api/public/api/v1/categorias/"+codigo,true);
             xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
             xhr.onreadystatechange = function() {
                 Categoria.callbackCadAltDel(xhr, 'alt');

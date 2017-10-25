@@ -49,7 +49,7 @@ class Login
         var xhr = Util.createXHR();
 
         if (mensagem == "" && xhr != undefined && 'withCredentials' in xhr) {
-            xhr.open("POST","http://192.168.33.10/laravel-api/public/api/v1/auth", true);
+            xhr.open("POST","http://127.0.0.1/laravel-api/public/api/v1/auth", true);
             xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
             xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
             xhr.onreadystatechange = function() {
@@ -61,7 +61,7 @@ class Login
 
                     if (xhr.status == '200') {
                         Util.createCookie('token', json.token, '1'); 
-                        window.location = "http://192.168.33.10/client-laravel-api/adm/paginas/home.htm";
+                        window.location = "http://127.0.0.1/client-laravel-api/adm/paginas/home.htm";
                     } else if (xhr.status == '422') {
                         var strErrosValidate = "";
 

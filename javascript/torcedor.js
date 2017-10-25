@@ -55,7 +55,7 @@ class Torcedor
             var consulta = "";
 
             if (token !== "") {
-                xhr.open("GET","http://192.168.33.10/sistemaRest/api/v1/controller/torcedor.php?a=1&tk="+token,true);
+                xhr.open("GET","http://127.0.0.1/sistemaRest/api/v1/controller/torcedor.php?a=1&tk="+token,true);
                 xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
                 xhr.onreadystatechange = function() {
                     //Verificar pelo estado "4" de pronto.
@@ -105,7 +105,7 @@ class Torcedor
             var token  = Util.getCookie('token');
 
             if (token !== "") {
-                xhr.open("GET","http://192.168.33.10/sistemaRest/api/v1/controller/torcedor.php?a=5&tk="+token,true);
+                xhr.open("GET","http://127.0.0.1/sistemaRest/api/v1/controller/torcedor.php?a=5&tk="+token,true);
                 xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
                 xhr.onreadystatechange = function() {
                     //Verificar pelo estado "4" de pronto.
@@ -134,7 +134,7 @@ class Torcedor
             var consulta = "";
 
             if (token !== "") {
-                xhr.open("GET","http://192.168.33.10/sistemaRest/api/v1/controller/torcedor.php?a=2&tk="+token,true);
+                xhr.open("GET","http://127.0.0.1/sistemaRest/api/v1/controller/torcedor.php?a=2&tk="+token,true);
                 xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
                 xhr.onreadystatechange = function() {
                     //Verificar pelo estado "4" de pronto.
@@ -167,7 +167,7 @@ class Torcedor
             }
 
             if (token !== "") {
-                xhr.open("GET","http://192.168.33.10/sistemaRest/api/v1/controller/torcedor.php?a=3&tk="+token+consulta,true);
+                xhr.open("GET","http://127.0.0.1/sistemaRest/api/v1/controller/torcedor.php?a=3&tk="+token+consulta,true);
                 xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
                 xhr.onreadystatechange = function() {
                     //Verificar pelo estado "4" de pronto.
@@ -292,7 +292,7 @@ class Torcedor
         
 
         if(mensagem == "" && xhr != undefined) {
-            xhr.open("POST","http://192.168.33.10/laravel-api/public/api/v1/cadusuario",true);
+            xhr.open("POST","http://127.0.0.1/laravel-api/public/api/v1/cadusuario",true);
             xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
             xhr.onreadystatechange = function() {
                 Torcedor.callbackCadAlt(xhr, 'cad');
@@ -323,7 +323,7 @@ class Torcedor
         }
 
         if(mensagem == "" && xhr != undefined) {
-            xhr.open("POST","http://192.168.33.10/sistemaRest/api/v1/controller/torcedor.php?a=8"+consulta,true);
+            xhr.open("POST","http://127.0.0.1/sistemaRest/api/v1/controller/torcedor.php?a=8"+consulta,true);
             xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
             xhr.onreadystatechange = function() {
                 //Verificar pelo estado "4" de pronto.
@@ -356,7 +356,7 @@ class Torcedor
         }
 
         if(mensagem == "" && xhr != undefined) {
-            xhr.open("PUT","http://192.168.33.10/laravel-api/public/api/v1/altsenhalog",true);
+            xhr.open("PUT","http://127.0.0.1/laravel-api/public/api/v1/altsenhalog",true);
             xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
             xhr.onreadystatechange = function() {
                 //Verificar pelo estado "4" de pronto.
@@ -432,7 +432,7 @@ class Torcedor
         }
 
         if(mensagem == "" && xhr != undefined) {
-            xhr.open("PUT","http://192.168.33.10/laravel-api/public/api/v1/esquecisenha",true);
+            xhr.open("PUT","http://127.0.0.1/laravel-api/public/api/v1/esquecisenha",true);
             xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
             xhr.onreadystatechange = function() {
                 //Verificar pelo estado "4" de pronto.
@@ -486,7 +486,7 @@ class Torcedor
         }
 
         if(mensagem == "" && xhr != undefined) {
-            xhr.open("PUT","http://192.168.33.10/laravel-api/public/api/v1/altsenha",true);
+            xhr.open("PUT","http://127.0.0.1/laravel-api/public/api/v1/altsenha",true);
             xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
             xhr.onreadystatechange = function() {
                 //Verificar pelo estado "4" de pronto.
@@ -558,7 +558,7 @@ class Torcedor
             consulta = "&tk="+token;
         }
 
-        xhr.open("GET","http://192.168.33.10/sistemaRest/api/v1/controller/torcedor.php?a=7&id="+codigo+consulta,true);   
+        xhr.open("GET","http://127.0.0.1/sistemaRest/api/v1/controller/torcedor.php?a=7&id="+codigo+consulta,true);   
         xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
         xhr.onreadystatechange = function() {
             //Verificar pelo estado "4" de pronto.
@@ -588,7 +588,7 @@ class Torcedor
             var token  = Util.getCookie('token');
 
             if (token !== "") {
-                xhr.open("GET","http://192.168.33.10/sistemaRest/api/v1/controller/torcedor.php?a=4&tk="+token,true);
+                xhr.open("GET","http://127.0.0.1/sistemaRest/api/v1/controller/torcedor.php?a=4&tk="+token,true);
                 xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
                 xhr.onreadystatechange = function() {
                     //Verificar pelo estado "4" de pronto.
