@@ -131,4 +131,25 @@ class Util
             window.location = "http://127.0.0.1/client-laravel-api/site/paginas/home.htm";
         }
     }
+
+    static alterbgmenu(op) 
+    {
+        document.getElementById("menuprincipal").classList.remove('bg-primary', 'bg-success', 'bg-warning', 'bg-info', 'bg-danger', 'bg-dark');
+
+        if (op == 1) {
+            document.getElementById("menuprincipal").classList.add('bg-primary');
+        } else if (op == 2) {
+            document.getElementById("menuprincipal").classList.add('bg-success');
+        } else if (op == 3) {
+            document.getElementById("menuprincipal").classList.add('bg-warning');
+        } else if (op == 4) {
+            document.getElementById("menuprincipal").classList.add('bg-info');
+        } else if (op == 5) {
+            document.getElementById("menuprincipal").classList.add('bg-danger');
+        } else {
+            document.getElementById("menuprincipal").classList.add('bg-dark');
+        }
+
+        
+    }
 }

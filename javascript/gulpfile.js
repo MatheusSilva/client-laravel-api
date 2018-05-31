@@ -1,12 +1,12 @@
 
 
 var js  = [
-    '/var/www/html/client-laravel-api/javascript/util.js'
-    ,'/var/www/html/client-laravel-api/javascript/login.js'
-    ,'/var/www/html/client-laravel-api/javascript/categoria.js'
-    ,'/var/www/html/client-laravel-api/javascript/divisao.js'
-    ,'/var/www/html/client-laravel-api/javascript/time.js'
-    ,'/var/www/html/client-laravel-api/javascript/tecnico.js'		
+    '/var/www//client-laravel-api/javascript/util.js'
+    ,'/var/www//client-laravel-api/javascript/login.js'
+    ,'/var/www//client-laravel-api/javascript/categoria.js'
+    ,'/var/www//client-laravel-api/javascript/divisao.js'
+    ,'/var/www//client-laravel-api/javascript/time.js'
+    ,'/var/www//client-laravel-api/javascript/tecnico.js'		
 ];
 
 // Núcleo do Gulp
@@ -22,7 +22,7 @@ gulp.task('concat', function() {
         .pipe(minifyJS())
         .pipe(concat('bundle.min.js'))  // Arquivo único de saída
         .pipe(uglify({ mangle: false })) // Transforma para formato ilegível
-        .pipe(gulp.dest('/var/www/html/client-laravel-api/javascript/')); // pasta de destino do arquivo(s)
+        .pipe(gulp.dest('/var/www//client-laravel-api/javascript/')); // pasta de destino do arquivo(s)
 });
 
 // Tarefa de monitoração caso algum arquivo seja modificado, deve ser executado e deixado aberto, comando "gulp watch".

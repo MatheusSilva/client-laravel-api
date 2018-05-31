@@ -37,7 +37,7 @@ div {
 
 footer::before {
     position: absolute;   /* posição absoluta */
-	bottom: 0;   /* Fixa a div no fim da página */
+	bottom: 10;   /* Fixa a div no fim da página */
 	width: 100%;   /* Largura estende por toda página da div */
 	height: 200px;   /* Altura da div */
 	height:15px;

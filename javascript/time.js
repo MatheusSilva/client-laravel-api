@@ -248,17 +248,17 @@ class Time
             // Combine the first and last names into a single table field
             detalhes = "<a href=\"../consultas/detalhe.time.htm?codigo="
             + codigo
-            + "\"><span class='glyphicon glyphicon-info-sign' aria-hidden='true'></span></a>";
+            + "\"><i class='fas fa-info' aria-hidden='true'></i></a>";
 
             alterar = "<span>  </span><a href=\"../formularios/alterar.time.htm?codigo="
             + codigo
-            + "\"><span class='glyphicon glyphicon-edit' aria-hidden='true'></span></a>";
+            + "\"><i class='fas fa-edit'></i></a>";
 
             
 
             excluir = "<span>  </span><a href=\"javascript:Time.confirmar("
             + codigo
-            + ")\"><span class='glyphicon glyphicon-trash' aria-hidden='true'></span></a>";
+            + ")\"><i class='fas fa-trash'></i></a>";
 
             //console.log(row);
             return detalhes+alterar+excluir;

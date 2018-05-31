@@ -20,13 +20,11 @@
             });
         </script>
 
-        <link rel="stylesheet" href="../../css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u">
-
-        <link rel="stylesheet" href="../../css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp">
-
+        <link rel="stylesheet" href="../../css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" />
+        
         <script src="../../javascript/jquery.min.js"></script>
-
-        <script src="../../javascript/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"></script>
+        <script src="../../javascript/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"></script>
+        <script src="../../javascript/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"></script>
 
         <noscript>Seu navegador não suporta JavaScript ou mesmo foi desabilitado!</noscript>	
     </head>
@@ -35,13 +33,13 @@
         <header>
             <div id="headerimg"></div>
 
-            <nav class="navbar navbar-default">
-                <a class="navbar-brand" href="../paginas/home.htm">Home</a>
-                <a class="navbar-brand" href="../paginas/cadastros.htm">Cadastros</a>
-                <a class="navbar-brand" href="../paginas/consultas.htm">Consultas</a>
-                <a class="navbar-brand" href="../formularios/alterar.senha.htm">Alterar senha</a>
-                <a class="navbar-brand" href="../paginas/autenticacao2fatores.htm">Autenticação 2 fatores</a>
-                <a class="navbar-brand" href="../formularios/logout.htm">Sair</a>
+            <nav class="navbar navbar-dark bg-dark navbar-expand-lg " id="menuprincipal">
+                <a class="navbar-brand" href="../paginas/home.htm" onmouseover="Util.alterbgmenu()">Home</a>
+                <a class="navbar-brand" href="../paginas/cadastros.htm" onmouseover="Util.alterbgmenu(1)">Cadastros</a>
+                <a class="navbar-brand" href="../paginas/consultas.htm" onmouseover="Util.alterbgmenu(2)">Consultas</a>
+                <a class="navbar-brand" href="../formularios/alterar.senha.htm" onmouseover="Util.alterbgmenu(3)">Alterar senha</a>
+                <a class="navbar-brand" href="../paginas/autenticacao2fatores.htm" onmouseover="Util.alterbgmenu(4)">Autenticação 2 fatores</a>
+                <a class="navbar-brand" href="../formularios/logout.htm" onmouseover="Util.alterbgmenu(5)">Sair</a>
             </nav>
         </header>
 
