@@ -6,7 +6,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Cat&aacute;logo de Jogos</title>
-        <link rel="stylesheet" type="text/css" href="../../css/layoutadm.css" />
+        <link rel="stylesheet" type="text/css" href="../../css/layoutadm.min.css" />
         <link rel="stylesheet" href="../../css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" />
         
         <link rel="stylesheet" href="../../css/jquery-ui.min.css">
@@ -18,21 +18,41 @@
         <script src="../../javascript/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="></script>
         
         <script type="text/javascript">
-            Util.logado();
-            Util.queryString();
-            Tecnico.detalhe(location.queryString.codigo);
-
             document.addEventListener('DOMContentLoaded', function() {
-                jQuery("#txtDataNascimento").datepicker({
-                    dateFormat: 'dd/mm/yy',
-                    dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'],
-                    dayNamesMin: ['D','S','T','Q','Q','S','S','D'],
-                    dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb','Dom'],
-                    monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
-                    monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'],
-                    nextText: 'Próximo',
-                    prevText: 'Anterior'
-                });
+                Util.logado();
+                Util.queryString();
+                Tecnico.detalhe(location.queryString.codigo);
+
+                if (location.queryString.op == 1) {
+                    document.getElementById("titulo").innerHTML = "Alterar dados do técnico";
+                    document.getElementById("btnAcao").innerHTML = "Alterar";
+                    document.getElementById("btnAcao").setAttribute("onclick", "Tecnico.atualizar(frmTecnico)"); 
+
+                    Tecnico.detalhe(location.queryString.codigo);
+                    Tecnico.adicionadatepicker();
+                } else if (location.queryString.op == 2) {
+                    document.getElementById("titulo").innerHTML = "Detalhes do técnico";
+                    document.getElementById("btnAcao").innerHTML = "Voltar";
+                    document.getElementById("btnAcao").setAttribute("onclick", "Util.goBack()");
+
+                    document.getElementById("divcodigo").style.display = "block";
+                    Tecnico.detalhe(location.queryString.codigo);
+
+                    document.getElementById("codigo").setAttribute("readonly", "true"); 
+                    document.getElementById("codigo").classList.add('readonly');
+
+                    document.getElementById("txtNome").setAttribute("readonly", "true"); 
+                    document.getElementById("txtNome").classList.add('readonly');
+
+                    document.getElementById("txtDataNascimento").setAttribute("readonly", "true"); 
+                    document.getElementById("txtDataNascimento").classList.add('readonly');
+                } else {
+                    document.getElementById("titulo").innerHTML = "Cadastro de técnicos";
+                    document.getElementById("btnAcao").innerHTML = "Cadastrar";
+                    document.getElementById("btnAcao").setAttribute("onclick", "Tecnico.cadastrar(frmTecnico)"); 
+                    Tecnico.adicionadatepicker();
+                }
+
             });
         </script>
 
@@ -55,9 +75,14 @@
 
         <div class="container">
             <div class="col-sm-6 pull-left"> 
-                <h2 class="titulo">Alterar dados do técnico</h2>
+                <h2 class="titulo" id="titulo"></h2>
 
                 <form id="frmTecnico" name="frmTecnico" class="form-horizontal">
+                    <div class="form-group" style="display: none;" id="divcodigo">
+                        <label for="codigo">Codigo</label> 
+                        <input type="text" class="form-control" name="codigo" id="codigo" />
+                    </div>
+
                     <div class="form-group">
                       <label for="txtNome">Nome</label>
                       <input type="text" class="form-control" name="txtNome" id="txtNome" />
@@ -65,12 +90,11 @@
 
                     <div class="form-group">
                       <label for="txtDataNascimento">Data Nascimento</label>
-                      <input type="text" class="col-sm-2 form-control" name="txtDataNascimento" id="txtDataNascimento" placeholder="DD/MM/AAAA" />
+                      <input type="text" class="col-sm-3 form-control" name="txtDataNascimento" id="txtDataNascimento" placeholder="" />
                     </div>
                     
                     <div class="form-group">
-                      <input type="hidden" name="codigo" id="codigo" value="" />
-                      <button id="btnAtualizar" name="btnAtualizar" type="button" class="btn btn-default" onclick="Tecnico.atualizar(frmTecnico)">Alterar</button>
+                      <button id="btnAcao" name="btnAcao" type="button" class="btn btn-default"></button>
                     </div>
                 </form>
 

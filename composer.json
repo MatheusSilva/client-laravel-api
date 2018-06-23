@@ -4,12 +4,8 @@
     },
 	"autoload": {
 		"psr-0": {
-            "sistemaRest/tests": ""
-   		},
-	    "psr-4": {
-	      "matheus\\sistemaRest\\api\\v1\\lib\\": "api/v1/lib/",
-	      "matheus\\sistemaRest\\api\\v1\\model\\": "api/v1/model/"
-	    }
+            "client-laravel-api/tests": ""
+   		}
 	}
 }
 

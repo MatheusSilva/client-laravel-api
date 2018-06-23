@@ -48,15 +48,13 @@ class Categoria
             codigo = data.codigo_categoria;
 
             // Combine the first and last names into a single table field
-            detalhes = "<a href=\"../consultas/detalhe.categoria.htm?codigo="
+            detalhes = "<a href=\"../formularios/categoria.htm?op=2&codigo="
             + codigo
             + "\"><i class='fas fa-info' aria-hidden='true'></i></a>";
 
-            alterar = "<span>  </span><a href=\"../formularios/alterar.categoria.htm?codigo="
+            alterar = "<span>  </span><a href=\"../formularios/categoria.htm?op=1&codigo="
             + codigo
             + "\"><i class='fas fa-edit'></i></a>";
-
-            
 
             excluir = "<span>  </span><a href=\"javascript:Categoria.confirmar("
             + codigo

@@ -2,13 +2,24 @@
 
 class Util
 {
-    static createCookie(nome, valor, dias) 
+    static createCookie(nome, valor, tempo, opcao = 'dias') 
     {
         var expires;
         
-        if (dias) {
+        if (tempo) {
             var date = new Date();
-            date.setTime(date.getTime() + (dias * 24 * 60 * 60 * 1000));
+
+            if (opcao == 'dias') {
+                date.setTime(date.getTime() + (tempo * 24 * 60 * 60 * 1000));
+            } else if (opcao == 'horas') {
+                date.setTime(date.getTime() + (tempo * 60 * 60 * 1000));
+            } else if (opcao == 'minutos') {
+                date.setTime(date.getTime() + (tempo * 60 * 1000));
+            }
+
+            //var offset = '+3';  // e.g. if the timeZone is -3
+            //var MyDateWithOffset = new Date( date.toGMTString() + offset );
+            //os cookies trabalhao com timeZone/GMT 0, nao adianta converter, mas o cookie fica ativo corretamente por X dias
             expires = "; expires=" + date.toGMTString();
         } else {
             expires = "";
@@ -83,6 +94,8 @@ class Util
                  //Verificar pelo estado "4" de pronto.
                 if (xhr.readyState == '4' && xhr.status != '200') {
                     window.location = "http://127.0.0.1/client-laravel-api/adm/formularios/form.login.htm"; 
+                } else {
+                    Util.createCookie('token', Util.getCookie('token'), '10', 'minutos');
                 }
             }
 
@@ -149,7 +162,10 @@ class Util
         } else {
             document.getElementById("menuprincipal").classList.add('bg-dark');
         }
+    }
 
-        
+    static goBack() 
+    {
+        window.history.back();
     }
 }

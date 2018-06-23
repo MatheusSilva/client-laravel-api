@@ -60,7 +60,7 @@ class Login
                     var json = JSON.parse(xhr.responseText);
 
                     if (xhr.status == '200') {
-                        Util.createCookie('token', json.token, '1'); 
+                        Util.createCookie('token', json.token, '10', 'minutos');
                         window.location = "http://127.0.0.1/client-laravel-api/adm/paginas/home.htm";
                     } else if (xhr.status == '422') {
                         var strErrosValidate = "";

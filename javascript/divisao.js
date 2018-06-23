@@ -44,15 +44,13 @@ class Divisao
             codigo = data.codigo_divisao;
 
             // Combine the first and last names into a single table field
-            detalhes = "<a href=\"../consultas/detalhe.divisao.htm?codigo="
+            detalhes = "<a href=\"../formularios/divisao.htm?op=2&codigo="
             + codigo
             + "\"><i class='fas fa-info' aria-hidden='true'></i></a>";
 
-            alterar = "<span>  </span><a href=\"../formularios/alterar.divisao.htm?codigo="
+            alterar = "<span>  </span><a href=\"../formularios/divisao.htm?op=1&codigo="
             + codigo
             + "\"><i class='fas fa-edit'></i></a>";
-
-            
 
             excluir = "<span>  </span><a href=\"javascript:Divisao.confirmar("
             + codigo

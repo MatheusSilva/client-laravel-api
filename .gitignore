@@ -1,6 +1,7 @@
 /vendor
 /img
 /nbproject
+/node_modules
 .settings
 .project
 .buildpath

@@ -78,15 +78,13 @@ class Tecnico
             codigo = data.codigo_tecnico;
 
             // Combine the first and last names into a single table field
-            detalhes = "<a href=\"../consultas/detalhe.tecnico.htm?codigo="
+            detalhes = "<a href=\"../formularios/tecnico.htm?op=2&codigo="
             + codigo
             + "\"><i class='fas fa-info' aria-hidden='true'></i></a>";
 
-            alterar = "<span>  </span><a href=\"../formularios/alterar.tecnico.htm?codigo="
+            alterar = "<span>  </span><a href=\"../formularios/tecnico.htm?op=1&codigo="
             + codigo
             + "\"><i class='fas fa-edit'></i></a>";
-
-            
 
             excluir = "<span>  </span><a href=\"javascript:Tecnico.confirmar("
             + codigo
@@ -320,5 +318,19 @@ class Tecnico
         } else {
             document.getElementById("mensagem").innerHTML = mensagem;
         } 
+    }
+
+    static adicionadatepicker() 
+    {
+        jQuery("#txtDataNascimento").datepicker({
+            dateFormat: 'dd/mm/yy',
+            dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'],
+            dayNamesMin: ['D','S','T','Q','Q','S','S','D'],
+            dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb','Dom'],
+            monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+            monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'],
+            nextText: 'Próximo',
+            prevText: 'Anterior'
+        });
     }
 }
